@@ -1,0 +1,6 @@
+# Cloudflare Pages Redirects
+/  /static/index.html  200
+/app  https://chittytrace-app.pages.dev  302
+/docs  https://github.com/ChittyApps/chittytrace  302
+/support  mailto:support@chittycorp.com  302
+/cook-county  https://chittytrace-cc.pages.dev  302
