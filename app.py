@@ -7,14 +7,33 @@ import plotly.graph_objects as go
 from datetime import datetime, date
 import json
 import os
+import logging
+import traceback
 from typing import Dict, List, Any, Optional
 
-from document_processor import DocumentProcessor
-from claude_integration import ClaudeAnalyzer
-from package_generator import PackageGenerator
-from form_filler import FormFiller
-from command_executor import CommandExecutor
-from config import DOCUMENT_CATEGORIES, BASE_DIR
+# Configure logging for debugging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('debug.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
+
+try:
+    from document_processor import DocumentProcessor
+    from claude_integration import ClaudeAnalyzer
+    from package_generator import PackageGenerator
+    from form_filler import FormFiller
+    from command_executor import CommandExecutor
+    from config import DOCUMENT_CATEGORIES, BASE_DIR
+    logger.info("All modules imported successfully")
+except ImportError as e:
+    logger.error(f"Import error: {e}")
+    st.error(f"Import error: {e}")
+    st.stop()
 
 # Page configuration
 st.set_page_config(
@@ -165,21 +184,29 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Initialize session state
-if 'documents' not in st.session_state:
-    st.session_state.documents = []
-if 'analyzer' not in st.session_state:
-    st.session_state.analyzer = None
-if 'processor' not in st.session_state:
-    st.session_state.processor = DocumentProcessor()
-if 'package_generator' not in st.session_state:
-    st.session_state.package_generator = None
-if 'form_filler' not in st.session_state:
-    st.session_state.form_filler = None
-if 'command_executor' not in st.session_state:
-    st.session_state.command_executor = None
-if 'indexed' not in st.session_state:
-    st.session_state.indexed = False
+# Initialize session state with error handling
+try:
+    if 'documents' not in st.session_state:
+        st.session_state.documents = []
+    if 'analyzer' not in st.session_state:
+        st.session_state.analyzer = None
+    if 'processor' not in st.session_state:
+        st.session_state.processor = DocumentProcessor()
+        logger.info("DocumentProcessor initialized")
+    if 'package_generator' not in st.session_state:
+        st.session_state.package_generator = None
+    if 'form_filler' not in st.session_state:
+        st.session_state.form_filler = None
+    if 'command_executor' not in st.session_state:
+        st.session_state.command_executor = None
+    if 'indexed' not in st.session_state:
+        st.session_state.indexed = False
+    if 'debug_mode' not in st.session_state:
+        st.session_state.debug_mode = False
+except Exception as e:
+    logger.error(f"Error initializing session state: {e}")
+    st.error(f"Initialization error: {e}")
+    st.stop()
 
 # Sidebar with improved styling
 with st.sidebar:
@@ -206,8 +233,23 @@ with st.sidebar:
             st.session_state.form_filler = FormFiller(st.session_state.analyzer)
             st.session_state.command_executor = CommandExecutor(st.session_state.analyzer)
             st.success("✅ Claude integration initialized")
+            logger.info("Claude integration initialized successfully")
         except Exception as e:
+            logger.error(f"Failed to initialize Claude: {e}")
             st.error(f"Failed to initialize Claude: {e}")
+            st.text(f"Full error: {traceback.format_exc()}")
+
+    # Debug mode toggle
+    st.session_state.debug_mode = st.checkbox("🐛 Debug Mode", value=st.session_state.debug_mode)
+    
+    if st.session_state.debug_mode:
+        st.info("Debug mode enabled - Check console for detailed logs")
+        st.json({
+            "Documents loaded": len(st.session_state.documents),
+            "Analyzer initialized": st.session_state.analyzer is not None,
+            "Indexed": st.session_state.indexed,
+            "Session state keys": list(st.session_state.keys())
+        })
 
     st.divider()
 
@@ -346,27 +388,50 @@ with tab1:
 
         if st.button("🔍 Analyze", type="primary", use_container_width=True):
             if query and st.session_state.indexed:
-                with st.spinner("Analyzing..."):
-                    # Search for relevant documents
-                    relevant_docs = st.session_state.analyzer.search_documents(query, k=search_k)
+                try:
+                    with st.spinner("Analyzing..."):
+                        logger.info(f"Starting analysis for query: {query}")
+                        
+                        # Search for relevant documents
+                        relevant_docs = st.session_state.analyzer.search_documents(query, k=search_k)
+                        logger.info(f"Found {len(relevant_docs)} relevant documents")
 
-                    # Get analysis
-                    response = asyncio.run(
-                        st.session_state.analyzer.analyze_with_context(query, relevant_docs)
-                    )
+                        # Get analysis
+                        response = asyncio.run(
+                            st.session_state.analyzer.analyze_with_context(query, relevant_docs)
+                        )
+                        logger.info("Analysis completed successfully")
 
-                    # Display results
-                    st.subheader("Analysis Results")
-                    st.write(response)
+                        # Display results
+                        st.subheader("Analysis Results")
+                        st.write(response)
 
-                    # Show source documents
-                    with st.expander("📄 Source Documents"):
-                        for doc in relevant_docs[:5]:
-                            st.write(f"**{doc.metadata['file_name']}**")
-                            st.text(doc.page_content[:300] + "...")
-                            st.divider()
+                        # Show source documents
+                        with st.expander("📄 Source Documents"):
+                            for doc in relevant_docs[:5]:
+                                st.write(f"**{doc.metadata['file_name']}**")
+                                st.text(doc.page_content[:300] + "...")
+                                st.divider()
+                                
+                        if st.session_state.debug_mode:
+                            with st.expander("🐛 Debug Info"):
+                                st.json({
+                                    "query": query,
+                                    "search_k": search_k,
+                                    "docs_found": len(relevant_docs),
+                                    "response_length": len(str(response))
+                                })
+                                
+                except Exception as e:
+                    logger.error(f"Analysis failed: {e}")
+                    logger.error(traceback.format_exc())
+                    st.error(f"Analysis failed: {e}")
+                    if st.session_state.debug_mode:
+                        st.code(traceback.format_exc())
             elif not st.session_state.indexed:
                 st.error("Please index documents first using the sidebar button")
+            elif not query:
+                st.warning("Please enter a query to analyze")
 
 # Tab 2: Package Creator
 with tab2:

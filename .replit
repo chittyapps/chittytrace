@@ -11,3 +11,15 @@ deploymentTarget = "cloudrun"
 [[ports]]
 localPort = 8501
 externalPort = 80
+
+[workflows]
+runButton = "Run Streamlit App"
+
+[[workflows.workflow]]
+name = "Run Streamlit App"
+author = 40576215
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "streamlit run app.py --server.port=5000 --server.address=0.0.0.0"
