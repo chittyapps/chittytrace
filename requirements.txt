@@ -16,3 +16,11 @@ chardet>=5.2.0
 watchdog>=4.0.0
 rich>=13.0.0
 click>=8.1.0
+aiohttp
+asyncpg
+fastapi
+langchain-core
+numpy
+pydantic
+uvicorn
+networkx
