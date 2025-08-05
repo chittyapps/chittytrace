@@ -1,0 +1,10 @@
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["python", "app.py"]
+deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 8501
+externalPort = 80

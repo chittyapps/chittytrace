@@ -1,0 +1,34 @@
+{
+  "name": "chitty-trace",
+  "version": "1.0.0",
+  "description": "ChittyTrace - AI-Powered Financial Forensics Platform",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build": "esbuild src/index.js --bundle --outfile=dist/index.js --format=esm --platform=neutral --target=es2022",
+    "start": "wrangler dev --local",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.24.3",
+    "hono": "^4.0.0",
+    "@hono/node-server": "^1.8.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0",
+    "esbuild": "^0.19.0",
+    "@cloudflare/workers-types": "^4.20240117.0"
+  },
+  "author": "ChittyCorp, LLC <support@chittycorp.com>",
+  "license": "MIT",
+  "homepage": "https://chittycorp.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChittyApps/flow-of-funds-analyzer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ChittyApps/flow-of-funds-analyzer/issues",
+    "email": "support@chittycorp.com"
+  }
+}
