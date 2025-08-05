@@ -1,12 +1,16 @@
-# ChittyTrace
+# ChittyTrace-CC
 
 [![ChittyCorp](https://img.shields.io/badge/ChittyCorp-LLC-blue.svg)](https://chittycorp.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 
-A comprehensive AI-powered system for analyzing financial documents, tracing fund flows, and generating court-ready exhibit packages with Cook County formatting compliance.
+**ChittyTrace-CC for Cook County Illinois (Chicago) - Financial Document Analysis & Court Ready Exhibit Package Development**
 
-**Developed by ChittyCorp, LLC** - Advanced AI solutions for legal and financial analysis.
+*Specialized version for Cook County Circuit Court with local attorney optimizations*
+
+A comprehensive AI-powered financial forensics platform optimized specifically for Cook County attorneys and legal professionals.
+
+**Developed by ChittyCorp, LLC** - Part of the Chitty ecosystem of AI-powered business solutions.
 
 ## Features
 
