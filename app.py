@@ -250,6 +250,13 @@ with st.sidebar:
             "Indexed": st.session_state.indexed,
             "Session state keys": list(st.session_state.keys())
         })
+        
+        # Import and call debug functions
+        from debug_utils import system_info, debug_session_state, check_file_permissions, test_claude_connection
+        system_info()
+        debug_session_state()
+        check_file_permissions()
+        test_claude_connection()
 
     st.divider()
 
