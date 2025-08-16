@@ -40,7 +40,7 @@ A comprehensive AI-powered financial forensics platform optimized specifically f
 
 1. Clone the repository:
 ```bash
-cd /Users/nickbianchi/Desktop/Flow_of_Funds_Package/flow_analyzer
+cd /flow_analyzer
 ```
 
 2. Create virtual environment:
@@ -237,4 +237,4 @@ For issues, questions, or commercial licensing inquiries:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Copyright (c) 2024 ChittyCorp, LLC
+Copyright (c) 2025 ChittyCorp, LLC
