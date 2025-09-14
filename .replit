@@ -23,3 +23,15 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "streamlit run app.py --server.port=5000 --server.address=0.0.0.0"
+
+[[workflows.workflow]]
+name = "Serve Landing Page"
+author = 40576215
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python static_server.py"
+
+[agent]
+expertMode = true
