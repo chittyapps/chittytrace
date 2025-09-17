@@ -3,7 +3,8 @@
     "allow": [
       "Bash(mkdir:*)",
       "Bash(git add:*)",
-      "Bash(python -m pytest tests/ --tb=short -v)"
+      "Bash(python -m pytest tests/ --tb=short -v)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []
