@@ -4,7 +4,17 @@
       "Bash(mkdir:*)",
       "Bash(git add:*)",
       "Bash(python -m pytest tests/ --tb=short -v)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(npm create:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss init:*)",
+      "Bash(git init:*)",
+      "Bash(rm:*)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(wrangler dev:*)",
+      "Bash(wrangler login:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,40 +1,104 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import Anthropic from '@anthropic-ai/sdk'
+import { ChittyCloudflareCore } from './chitty-cloudflare-core.js'
 
 const app = new Hono()
 
-// Enable CORS
+// Initialize ChittyCloudflareCore
+const chitty = new ChittyCloudflareCore({
+  services: {
+    schema: { enabled: true, domain: 'schema.chitty.cc' },
+    id: { enabled: true, domain: 'id.chitty.cc' },
+    analytics: { enabled: true, domain: 'analytics.chitty.cc' },
+    storage: { enabled: true, domain: 'storage.chitty.cc' },
+    email: { enabled: true, domain: 'email.chitty.cc' },
+    auth: { enabled: true, domain: 'auth.chitty.cc' }
+  },
+  ai: {
+    enabled: true,
+    vectorize: { enabled: true },
+    models: ['claude-3-5-sonnet-20241022']
+  },
+  security: {
+    cors: {
+      origins: ['*'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      headers: ['Content-Type', 'Authorization', 'X-API-Key']
+    },
+    rateLimit: {
+      enabled: true,
+      requests: 100,
+      window: 60000
+    }
+  }
+})
+
+// Initialize the ChittyOS core
+await chitty.initialize()
+
+// Enable CORS using ChittyOS configuration
 app.use('/*', cors({
-  origin: '*',
-  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowHeaders: ['Content-Type', 'Authorization'],
+  origin: chitty.config.security.cors.origins,
+  allowMethods: chitty.config.security.cors.methods,
+  allowHeaders: chitty.config.security.cors.headers,
 }))
+
+// Add ChittyOS middleware
+app.use('/*', async (c, next) => {
+  // Rate limiting
+  if (!chitty.security.rateLimit(c.req)) {
+    return chitty.createErrorResponse('Rate limit exceeded', 429)
+  }
+
+  // Authentication
+  const auth = chitty.security.auth(c.req)
+  c.set('auth', auth)
+  c.set('chitty', chitty)
+
+  await next()
+})
 
 // Initialize Anthropic client
 const getAnthropicClient = (apiKey) => {
   return new Anthropic({ apiKey })
 }
 
-// Health check
-app.get('/health', (c) => {
-  return c.json({ 
-    status: 'healthy', 
-    timestamp: new Date().toISOString(),
-    service: 'Flow Analyzer API'
+// Health check with ChittyOS integration
+app.get('/health', async (c) => {
+  const chitty = c.get('chitty')
+  const healthStatus = await chitty.healthCheck()
+
+  return c.json({
+    ...healthStatus,
+    service: 'ChittyTrace - Flow Analyzer API',
+    chittyos: {
+      version: '1.0.0',
+      core: 'enabled'
+    }
   })
 })
 
-// Document analysis endpoint
+// Document analysis endpoint with ChittyOS integration
 app.post('/api/analyze', async (c) => {
   try {
+    const chitty = c.get('chitty')
+    const auth = c.get('auth')
     const { query, context, apiKey } = await c.req.json()
-    
-    if (!apiKey) {
-      return c.json({ error: 'API key required' }, 401)
+
+    const finalApiKey = apiKey || auth.apiKey
+    if (!finalApiKey) {
+      return chitty.createErrorResponse('API key required', 401)
     }
 
-    const anthropic = getAnthropicClient(apiKey)
+    // Track analytics
+    await chitty.getService('analytics')?.track('document_analysis', {
+      query: query.substring(0, 100),
+      hasContext: !!context,
+      userId: auth.userId
+    })
+
+    const anthropic = getAnthropicClient(finalApiKey)
     
     const response = await anthropic.messages.create({
       model: 'claude-3-5-sonnet-20241022',
@@ -52,16 +116,27 @@ Please provide a detailed analysis with specific references to the documents.`
       }]
     })
 
-    return c.json({
+    // Store in ChittyOS storage for caching
+    const storageService = chitty.getService('storage')
+    const analysisId = 'analysis-' + Date.now()
+    const analysisResult = {
       analysis: response.content[0].text,
       metadata: {
         model: 'claude-3-5-sonnet-20241022',
         timestamp: new Date().toISOString(),
-        tokens_used: response.usage
+        tokens_used: response.usage,
+        query,
+        userId: auth.userId,
+        analysisId
       }
-    })
+    }
+
+    await storageService?.put(analysisId, analysisResult)
+
+    return c.json(analysisResult)
   } catch (error) {
-    return c.json({ error: error.message }, 500)
+    const chitty = c.get('chitty')
+    return chitty.createErrorResponse(error.message, 500)
   }
 })
 

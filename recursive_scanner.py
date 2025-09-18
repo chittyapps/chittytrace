@@ -147,7 +147,8 @@ class RecursiveScanner:
             if file_path.stat().st_size > 100 * 1024 * 1024:
                 logger.warning(f"Skipping large file: {file_path} (>100MB)")
                 return False
-        except:
+        except (OSError, PermissionError) as e:
+            logger.warning(f"Cannot access file {file_path}: {e}")
             return False
         
         return True
