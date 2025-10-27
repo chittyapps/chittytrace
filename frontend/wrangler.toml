@@ -1,15 +1,12 @@
-name = "modern-react-app"
-main = "worker.js"
+name = "chittytrace"
+pages_build_output_dir = "dist"
 compatibility_date = "2024-09-18"
 compatibility_flags = ["nodejs_compat"]
 
 [env.production]
-name = "modern-react-app-prod"
-
-# AI Model bindings for Cloudflare Workers AI
-[ai]
-binding = "AI"
+name = "chittytrace-prod"
 
 # Environment variables
 [vars]
 ENVIRONMENT = "production"
+VITE_REGISTRY_URL = "https://registry.chitty.cc"
