@@ -14,7 +14,13 @@
       "Bash(npm run dev:*)",
       "Bash(curl:*)",
       "Bash(wrangler dev:*)",
-      "Bash(wrangler login:*)"
+      "Bash(wrangler login:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm search:*)",
+      "Bash(cat:*)",
+      "Bash(npx wrangler pages deploy:*)",
+      "Bash(git commit:*)",
+      "Bash(git pull:*)"
     ],
     "deny": [],
     "ask": []
