@@ -163,7 +163,9 @@ my separate, pre-marital IRA withdrawal.
 **Classification:** SEPARATE PROPERTY (if properly traced)
 **RISK LEVEL:** ⚠️ HIGH (purchased during marriage = presumptively MARITAL)
 
-**THE COMPLEX TRACE - MOTHER'S LOAN:**
+**THE COMPLEX TRACE - MOTHER'S LOAN TO ARIBIA LLC:**
+
+⚠️ **IMPORTANT:** Mother loaned directly to ARIBIA LLC (not to you personally)
 
 ```
 TOTAL PURCHASE NEEDED:
@@ -176,41 +178,52 @@ Amount: $[AMOUNT]
 From: [Specify: Savings? IRA? Business income from IT CAN BE?]
 Evidence: [Bank statements showing withdrawal]
      ↓
-SOURCE #2: Loan from Mother
+SOURCE #2: Loan from Mother to ARIBIA LLC
 Mother's Name: [FULL LEGAL NAME]
 Loan Amount: $[AMOUNT]
 Loan Date: [DATE]
      ↓
-STEP 1: Mother Loans Money to YOU (not to Luisa)
+STEP 1: Mother Loans Money to ARIBIA LLC (not to you personally)
 Date: [DATE]
 Amount: $[AMOUNT]
-To: Nicholas Bianchi (individually)
+To: ARIBIA LLC (the entity)
 How: [Wire transfer? Check? Method]
-Evidence: [Bank statement showing deposit, OR promissory note]
+Evidence: [Promissory note with ARIBIA LLC as borrower]
      ↓
-STEP 2: You Contribute to ARIBIA LLC
+STEP 2: ARIBIA LLC Receives Loan Proceeds
 Date: [DATE]
-Amount: $[AMOUNT] (mother's loan proceeds)
-From: Your personal account
-To: ARIBIA LLC capital contribution
-Evidence: [Capital contribution documentation, LLC records]
+Amount: $[AMOUNT]
+Deposited to: ARIBIA LLC bank account
+Evidence: [ARIBIA LLC bank statement showing deposit]
      ↓
 STEP 3: ARIBIA LLC Purchases Villa Vista
 Date: June 22, 2024
 Purchase Price: $[AMOUNT]
 Title: ARIBIA LLC
-Funded by: Your capital contribution (which came from mother's loan)
+Funded by: Loan from mother + [your contribution if any]
 ```
 
-**MOTHER'S LOAN - CRITICAL DOCUMENTATION:**
+**MOTHER'S LOAN TO ARIBIA LLC - CRITICAL DOCUMENTATION:**
 
-To prove this is YOUR separate debt (not marital debt):
+⚠️ **LEGAL ANALYSIS - LOAN TO LLC (Not to You Personally):**
+
+This structure has ADVANTAGES and RISKS:
+
+**ADVANTAGES:**
+- Loan is a liability of ARIBIA LLC (the separate entity), not you personally
+- Keeps the transaction at the LLC level
+- No need to show "capital contribution" step
+
+**RISKS:**
+- Luisa was a member when loan was made (if loan was made while she was still a member)
+- She could argue she's liable for the debt too as a member
+- Court could view this as a marital debt if you personally guaranteed it
 
 **Loan Terms You Must Document:**
 
 | Term | What to Provide |
 |------|-----------------|
-| **Borrower** | Nicholas Anthony Bianchi (NOT "Nicholas and Luisa") |
+| **Borrower** | ARIBIA LLC (the entity, NOT you personally) |
 | **Lender** | [Mother's full legal name] |
 | **Amount** | $[EXACT AMOUNT] |
 | **Date** | [DATE loan was made] |
@@ -218,8 +231,10 @@ To prove this is YOUR separate debt (not marital debt):
 | **Term** | [X] years |
 | **Monthly Payment** | $[AMOUNT] (even if no payments yet, state agreed amount) |
 | **Maturity Date** | [DATE when fully due] |
-| **Security** | Unsecured / OR Secured by [specify collateral] |
-| **Purpose** | Loan to Nicholas Bianchi for investment purposes |
+| **Security** | Unsecured / OR Secured by [specify collateral - Villa Vista? Other?] |
+| **Personal Guarantee** | Did YOU personally guarantee the loan? (Critical question) |
+| **Member Authorization** | Did Luisa consent/authorize this loan as a member? |
+| **Purpose** | Loan to ARIBIA LLC for Villa Vista acquisition |
 
 **EVIDENCE YOU NEED:**
 
@@ -255,34 +270,57 @@ To prove this is YOUR separate debt (not marital debt):
 3. **Loan proceeds went to ARIBIA LLC** as YOUR capital contribution
 4. **No marital funds used** for this purchase
 
-**COMPLETE TRACING STATEMENT:**
+**COMPLETE TRACING STATEMENT (LOAN TO ARIBIA LLC):**
 
 ```
-On [DATE], my mother, [FULL NAME], loaned me $[AMOUNT] pursuant to a
-[promissory note/informal agreement] with the following terms: [%]
-interest, [X]-year term, $[AMOUNT] monthly payments, maturing on [DATE]
-(Exhibit 4-C-3: Promissory Note).
+On [DATE], my mother, [FULL NAME], loaned $[AMOUNT] to ARIBIA LLC pursuant
+to a promissory note with the following terms: [%] interest, [X]-year term,
+$[AMOUNT] monthly payments, maturing on [DATE] (Exhibit 4-C-3: Promissory
+Note with ARIBIA LLC as borrower).
 
-This loan was made to me individually, not jointly with Petitioner. The
-loan proceeds were deposited to my personal account on [DATE] (Exhibit
-4-C-6: Bank statement showing deposit).
+The loan was made to ARIBIA LLC (the entity), not to me personally or jointly
+with Petitioner. [If you guaranteed: I personally guaranteed the loan using
+my separate credit/assets.] [If no guarantee: The loan was made without
+personal guarantee from either me or Petitioner.]
 
-On [DATE], I contributed $[AMOUNT] from these loan proceeds as a capital
-contribution to ARIBIA LLC (Exhibit 3-F: Capital Contribution documentation).
-[If you also contributed your own funds: I also contributed $[AMOUNT] from
-my separate savings, for a total capital contribution of $[AMOUNT].]
+The loan proceeds of $[AMOUNT] were deposited directly to ARIBIA LLC's bank
+account on [DATE] (Exhibit 3-G: ARIBIA LLC bank statement showing deposit
+from [Mother's Name]).
+
+[If you also contributed: In addition to the loan proceeds, I contributed
+$[AMOUNT] to ARIBIA LLC from my separate funds (Exhibit 3-F: Capital
+contribution documentation).]
 
 On June 22, 2024, ARIBIA LLC purchased Villa Vista for $[AMOUNT] using
-these funds (Exhibit 4-C: Closing documents). The property was titled
-to ARIBIA LLC, not to me personally or jointly with Petitioner.
+these loan proceeds [and my capital contribution] (Exhibit 4-C: Closing
+documents). The property was titled to ARIBIA LLC.
 
-I am repaying the loan to my mother from [my separate income/ARIBIA LLC
-distributions/other separate source], not from marital income. [If payments
-made:] I have made the following payments: [list dates and amounts]
-(Exhibit 4-C-7: Repayment history).
+ARIBIA LLC is repaying the loan to my mother from rental income and LLC
+distributions, not from my marital income. [If payments made:] ARIBIA LLC
+has made the following payments: [list dates and amounts] (Exhibit 4-C-7:
+Repayment history showing payments from ARIBIA LLC account).
 
-No marital or joint funds were used for this acquisition. The property
-remains my separate property through proper tracing of the funding source.
+[CRITICAL ADDITION - Member Authorization Issue:]
+At the time of this loan ([DATE]), Petitioner was a [10]% member of ARIBIA
+LLC. [Choose one:]
+
+OPTION A (If she authorized):
+Petitioner authorized this loan in her capacity as a member, as documented
+in [Meeting Minutes/Written Consent/Email] dated [DATE] (Exhibit [X]).
+
+OPTION B (If she didn't authorize - RISKIER):
+As Manager of ARIBIA LLC, I had authority under the Operating Agreement
+Section [X.X] to secure financing for LLC purposes without member approval
+for transactions under $[AMOUNT] [or other authorization provision].
+
+OPTION C (If loan was after her removal - BEST):
+This loan was made on [DATE], which was [after/before] Petitioner's removal
+from ARIBIA LLC membership on October 21, 2024. [If after removal:] She had
+no authority or involvement in this transaction as she was no longer a member.
+
+No marital or joint funds were used for this acquisition. The property remains
+ARIBIA LLC's separate asset, and ARIBIA LLC was formed with my separate,
+pre-marital funds as established in this affidavit.
 ```
 
 ---
@@ -390,3 +428,242 @@ For each property, you need:
 ---
 
 **This is your roadmap for fund tracing. Every dollar must be traced from a separate source to the property purchase.**
+
+---
+
+## 🚨 CRITICAL QUESTIONS ABOUT MOTHER'S LOAN TO ARIBIA LLC
+
+Since you clarified the loan was to ARIBIA LLC (not to you personally), these questions are CRITICAL:
+
+### **TIMING QUESTION #1:**
+**When was the loan made?**
+
+**Villa Vista purchased:** June 22, 2024
+**Luisa removed from ARIBIA:** October 21, 2024
+
+**Was the loan:**
+- [ ] **BEFORE June 22, 2024** (to fund the purchase) ← MOST LIKELY
+- [ ] **AFTER June 22, 2024** (to reimburse purchase) ← LESS LIKELY
+- [ ] **AFTER October 21, 2024** (after Luisa's removal) ← BEST FOR YOUR CASE
+
+**Why This Matters:**
+
+**If loan was BEFORE her removal (June 2024 or earlier):**
+- Luisa was still a 10% member
+- She could argue she's liable for the debt
+- She could claim interest in Villa Vista purchased with that loan
+- You need to show she authorized it OR you had manager authority
+
+**If loan was AFTER her removal (after October 21, 2024):**
+- Much cleaner - she had no involvement
+- No authorization issue
+- Strengthens separate property argument
+
+### **AUTHORIZATION QUESTION #2:**
+**Did Luisa authorize or know about this loan?**
+
+Check your Operating Agreement:
+- Does it require member approval for loans over $[amount]?
+- Did you have manager authority to borrow without member consent?
+- Is there any documentation of her authorizing it?
+
+### **GUARANTEE QUESTION #3:**
+**Did you personally guarantee the loan?**
+
+This is critical:
+
+**If NO personal guarantee:**
+- Loan is purely ARIBIA LLC's debt
+- You're not personally liable
+- Stronger separate property argument
+
+**If YES, you personally guaranteed:**
+- Court could view your guarantee as creating marital debt
+- Especially if you used marital credit or assets as collateral
+- Need to show guarantee came from separate property/credit
+
+### **REPAYMENT QUESTION #4:**
+**How is the loan being repaid?**
+
+**From ARIBIA LLC account:** ✅ GOOD (keeps it separate)
+**From your personal separate account:** ⚠️ OK (but need to show it's separate money)
+**From joint account or marital income:** ❌ BAD (creates commingling issue)
+
+### **PROMISSORY NOTE QUESTION #5:**
+**Is there a written promissory note?**
+
+The note should show:
+- Borrower: ARIBIA LLC (not "Nicholas Bianchi")
+- Lender: [Mother's full name]
+- Amount, rate, term, payment schedule
+- Date executed
+- Signatures: [Your mother AND you as Manager of ARIBIA LLC]
+
+**If no written note exists:**
+- Create one NOW (but don't backdate)
+- Better to acknowledge "formalized existing oral agreement"
+- Attorney should review before signing
+
+---
+
+## 📋 UPDATED VILLA VISTA CHECKLIST
+
+Because loan was to ARIBIA LLC, you need:
+
+**Loan Documentation:**
+- [ ] Promissory note with ARIBIA LLC as borrower
+- [ ] Your signature as Manager of ARIBIA LLC
+- [ ] Mother's signature as lender
+- [ ] Loan date clearly stated
+- [ ] Terms clearly stated (amount, rate, term, payments)
+
+**Bank Records:**
+- [ ] ARIBIA LLC bank statement showing deposit from mother
+- [ ] Date of deposit
+- [ ] Amount deposited matching loan amount
+
+**Authorization Documentation:**
+- [ ] Operating Agreement section showing your manager authority to borrow
+- [ ] OR written consent from Luisa (if loan predates her removal)
+- [ ] OR evidence loan was after her removal (October 21, 2024)
+
+**Repayment Records:**
+- [ ] ARIBIA LLC bank statements showing loan payments to mother
+- [ ] Checks or wire transfers from ARIBIA LLC account
+- [ ] NOT from your personal or joint accounts
+
+**Timeline Documentation:**
+- [ ] Exact date loan was made
+- [ ] Was it before or after June 22, 2024 Villa Vista purchase?
+- [ ] Was it before or after October 21, 2024 Luisa's removal?
+
+---
+
+## ⚖️ LEGAL IMPLICATIONS - LOAN TO LLC
+
+### **ADVANTAGE:**
+- Keeps transaction at LLC level
+- ARIBIA LLC is separate entity with separate funding
+- If done right, reinforces separate property nature
+
+### **RISKS:**
+- If Luisa was member when loan made, she could claim:
+  - She's liable for debt as member
+  - She has interest in property purchased with loan
+  - She should have been consulted on major financial decision
+
+### **DEFENSIVE STRATEGY:**
+
+**BEST CASE (If loan was after October 21, 2024):**
+```
+The loan was made on [DATE] after Petitioner's removal from ARIBIA LLC
+membership on October 21, 2024. She had no involvement, authorization,
+or knowledge of this transaction as she was no longer a member at the
+time the loan was executed.
+```
+
+**SECOND BEST (If you had manager authority):**
+```
+As Manager of ARIBIA LLC, I had authority under Operating Agreement
+Section [X.X] to secure financing for LLC purposes without member approval.
+The loan of $[AMOUNT] from my mother to ARIBIA LLC was within my manager
+authority and was a standard business transaction to fund property
+acquisition.
+```
+
+**THIRD OPTION (If she authorized it):**
+```
+The loan was authorized by all ARIBIA LLC members, including Petitioner,
+as documented in [Written Consent/Minutes] dated [DATE] (Exhibit [X]).
+```
+
+---
+
+## 🎯 ACTION ITEMS - MOTHER'S LOAN
+
+**IMMEDIATE:**
+1. Determine EXACT DATE of loan
+2. Check if it was before or after October 21, 2024
+3. Find or create promissory note with ARIBIA LLC as borrower
+4. Locate ARIBIA LLC bank statement showing deposit
+
+**THIS WEEK:**
+1. Review Operating Agreement for manager borrowing authority
+2. Determine if Luisa authorized the loan (if before her removal)
+3. Document repayment source (must be from ARIBIA LLC account)
+4. Calculate: Loan amount + your contribution (if any) = purchase price
+
+**BEFORE FILING:**
+1. Attorney review of loan structure (HIGH PRIORITY)
+2. Ensure promissory note properly executed
+3. Verify timing helps or hurts your case
+4. Prepare explanation of authorization
+
+---
+
+## 📝 REVISED AFFIDAVIT LANGUAGE FOR VILLA VISTA
+
+Replace the Villa Vista section in your affidavit with this structure:
+
+```
+**Property #3: 4343 N Clarendon Avenue #1610, Chicago, IL ("Villa Vista")**
+
+15. **Acquisition Date:** June 22, 2024 (540 days after marriage)
+
+16. **Purchase Price:** $[AMOUNT]
+
+17. **Funding Source:** On [DATE], ARIBIA LLC received a loan of $[AMOUNT]
+    from my mother, [Full Legal Name], pursuant to a Promissory Note with
+    the following terms:
+    - Borrower: ARIBIA LLC (the entity)
+    - Principal: $[AMOUNT]
+    - Interest Rate: [%] per annum
+    - Repayment Term: [X] years
+    - Monthly Payment: $[AMOUNT]
+    - Maturity Date: [MM/DD/YYYY]
+    - Security: [Unsecured / Secured by Villa Vista / Other]
+    (Exhibit 4-C-3: Promissory Note)
+
+18. **Loan Authorization:** [Choose appropriate option:]
+
+    OPTION A: This loan was executed on [DATE], after Petitioner's removal
+    from ARIBIA LLC membership on October 21, 2024. Petitioner had no
+    involvement in this transaction.
+
+    OPTION B: As Manager of ARIBIA LLC, I had authority under Operating
+    Agreement Section [X.X] to secure financing for LLC purposes. This
+    loan was within my manager authority.
+
+    OPTION C: This loan was authorized by ARIBIA LLC members as documented
+    in [Written Consent] dated [DATE] (Exhibit [X]).
+
+19. **Receipt of Loan Proceeds:** The loan proceeds of $[AMOUNT] were
+    deposited directly to ARIBIA LLC's bank account on [DATE] (Exhibit 3-G:
+    ARIBIA LLC Bank Statement showing deposit).
+
+20. **Property Purchase:** On June 22, 2024, ARIBIA LLC used these loan
+    proceeds to purchase Villa Vista for $[AMOUNT] (Exhibit 4-C: Closing
+    documents showing purchase price and funding).
+
+21. **Repayment:** ARIBIA LLC is repaying the loan from LLC rental income
+    and operations, not from marital funds. [If payments made:] ARIBIA LLC
+    has made the following payments to date: [list dates and amounts]
+    (Exhibit 4-C-7: Cancelled checks or wire confirmations from ARIBIA LLC
+    account).
+
+22. **No Personal Guarantee:** [Choose one:]
+    - I did not personally guarantee this loan. It is solely ARIBIA LLC's
+      obligation.
+    - OR: I personally guaranteed the loan using my separate credit and
+      assets, not marital property.
+
+23. **No Marital Funds Used:** No marital or joint funds were used for this
+    acquisition. The property was purchased by ARIBIA LLC using proceeds
+    from a loan to the LLC entity, and ARIBIA LLC was formed and capitalized
+    with my separate, pre-marital funds as established in this affidavit.
+```
+
+---
+
+This correction is CRITICAL to your case. Make sure your affidavit reflects that the loan was to ARIBIA LLC, not to you personally.
+
