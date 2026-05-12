@@ -9,3 +9,18 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 ENVIRONMENT = "production"
 VITE_REGISTRY_URL = "https://registry.chitty.cc"
+
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+destinations = ["chittytrack-logs"]
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 1
+destinations = ["chittytrack-traces"]
+persist = false

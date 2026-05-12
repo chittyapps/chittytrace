@@ -1,0 +1,65 @@
+{
+  "name": "flow-analyzer",
+  "main": "src/index.js",
+  "compatibility_date": "2026-03-16",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "hyperdrive": [
+    {
+      "binding": "CHITTYOS_CORE_DB",
+      "id": "1d126444cff1416cb415447e6cc6d15a"
+    },
+    {
+      "binding": "SERVICE_SCOPE_DB",
+      "id": "a41987b2faff4acc92d4570117c65f94"
+    },
+    {
+      "binding": "TRACE_DB",
+      "id": "a41987b2faff4acc92d4570117c65f94"
+    }
+  ],
+  "vars": {
+    "ENVIRONMENT": "production"
+  },
+  "build": {
+    "command": "npm run build",
+    "cwd": "./",
+    "watch_dir": "src"
+  },
+  "rules": [
+    {
+      "type": "ESModule",
+      "globs": [
+        "**/*.js"
+      ]
+    }
+  ],
+  "placement": {
+    "mode": "smart"
+  },
+  "tail_consumers": [
+    {
+      "service": "chittytrack"
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "invocation_logs": true,
+      "destinations": [
+        "chittytrack-logs"
+      ]
+    },
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "destinations": [
+        "chittytrack-traces"
+      ],
+      "persist": false
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import Anthropic from '@anthropic-ai/sdk'
 import { ChittyCloudflareCore } from './chitty-cloudflare-core.js'
+import { traceScopeLog } from './scope-projector.js'
 
 const app = new Hono()
 
@@ -44,18 +45,16 @@ app.use('/*', cors({
   allowHeaders: chitty.config.security.cors.headers,
 }))
 
-// Add ChittyOS middleware
+// Add ChittyOS middleware (graceful — doesn't block if core init failed)
 app.use('/*', async (c, next) => {
-  // Rate limiting
-  if (!chitty.security.rateLimit(c.req)) {
-    return chitty.createErrorResponse('Rate limit exceeded', 429)
+  try {
+    const auth = chitty.security?.auth?.(c.req) ?? { isAuthenticated: false, apiKey: null, userId: null }
+    c.set('auth', auth)
+    c.set('chitty', chitty)
+  } catch {
+    c.set('auth', { isAuthenticated: false, apiKey: null, userId: null })
+    c.set('chitty', chitty)
   }
-
-  // Authentication
-  const auth = chitty.security.auth(c.req)
-  c.set('auth', auth)
-  c.set('chitty', chitty)
-
   await next()
 })
 
@@ -64,18 +63,12 @@ const getAnthropicClient = (apiKey) => {
   return new Anthropic({ apiKey })
 }
 
-// Health check with ChittyOS integration
-app.get('/health', async (c) => {
-  const chitty = c.get('chitty')
-  const healthStatus = await chitty.healthCheck()
-
+// Health check — no middleware dependency
+app.get('/health', (c) => {
   return c.json({
-    ...healthStatus,
+    status: 'ok',
     service: 'ChittyTrace - Flow Analyzer API',
-    chittyos: {
-      version: '1.0.0',
-      core: 'enabled'
-    }
+    hyperdrive: !!c.env?.CHITTYOS_CORE_DB
   })
 })
 
@@ -132,6 +125,15 @@ Please provide a detailed analysis with specific references to the documents.`
     }
 
     await storageService?.put(analysisId, analysisResult)
+
+    // Project scope: analysis completed
+    traceScopeLog(c, {
+      externalId: analysisId,
+      scopeType: 'trace_investigation',
+      title: `Analysis: ${query.substring(0, 80)}`,
+      localStatus: 'completed',
+      metadata: { tokensUsed: response.usage, userId: auth.userId },
+    }, c.env)
 
     return c.json(analysisResult)
   } catch (error) {
@@ -319,6 +321,17 @@ app.post('/api/commands', async (c) => {
       temperature: 0,
       messages: [{ role: 'user', content: prompt }]
     })
+
+    const commandId = `cmd-${command}-${Date.now()}`;
+
+    // Project scope: command execution
+    traceScopeLog(c, {
+      externalId: commandId,
+      scopeType: 'trace_investigation',
+      title: `Command: ${command}`,
+      localStatus: 'completed',
+      metadata: { command, parameters },
+    }, c.env)
 
     return c.json({
       command,

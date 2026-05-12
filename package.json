@@ -13,6 +13,7 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.24.3",
     "@chittyos/core": "^2.1.0",
+    "@chittyos/schema": "file:../../CHITTYFOUNDATION/chittyschema",
     "@hono/node-server": "^1.8.0",
     "hono": "^4.0.0"
   },
