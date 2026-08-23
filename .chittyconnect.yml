@@ -22,9 +22,13 @@ auth:
 
 secrets:
   provider: chittyconnect
-  vault: 1password
+  # Cold source of truth is ChittySecrets (secrets.chitty.cc), fronting Cloudflare
+  # Secrets Store. 1Password is retired and non-functional on operator hosts; do not
+  # reintroduce op:// references here.
+  cold_source: chittysecrets
+  runtime_delivery: cloudflare-secrets
   paths:
-    production: op://ChittyOS/ChittyTrace-CC-prod
+    production: chittysecrets://ChittyTrace-CC/prod
 
 github:
   repository: CHITTYAPPS/ChittyTrace-CC
