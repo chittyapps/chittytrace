@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T18:06:17.660438+00:00",
+  "generated_at": "2026-09-09T18:07:49.581087+00:00",
   "case_number": "2024-D-007847",
   "marriage_date": "2022-12-30",
   "marriage_date_authority": "verification.verification_items AS-1.1 (status=verified, confidence=very_high)",
@@ -10,7 +10,8 @@
       "name": "Lakeside Loft",
       "address": "541 W Addison St, Unit 3S, Chicago, IL 60613",
       "title_holder": "Nicholas Anthony Bianchi (individually)",
-      "tax_pin": "14-21-307-032-1006",
+      "tax_pin_on_file": "14-21-307-032-1006",
+      "tax_pin_corroborated": false,
       "acquired": "2019-11-21",
       "purchase_price": 202000.0,
       "sources": [
@@ -28,6 +29,12 @@
       "classification": "PRE-MARITAL",
       "days_from_marriage": 1135,
       "gaps": [
+        {
+          "severity": "CRITICAL",
+          "gap": "No source in the record corroborates a parcel identifier for this property.",
+          "consequence": "The property canon carries 14-21-307-032-1006, but that value appears in no verified fact, no indexed exhibit and no document in the store. It is an unsourced assertion, so this schedule does not state it as the parcel identifier. A legal description in a filed exhibit must come from the recorded instrument, not from a convenience table.",
+          "action": "Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate."
+        },
         {
           "severity": "REVIEW",
           "gap": "The acquisition date is recorded twice and the two copies disagree: 2019-11-21 against 2019-11-22.",
@@ -47,7 +54,8 @@
       "name": "Cozy Castle",
       "address": "550 W Surf St, Unit 504, Chicago, IL 60657",
       "title_holder": "Nicholas Anthony Bianchi (individually)",
-      "tax_pin": "14-28-200-011-1042",
+      "tax_pin_on_file": "14-28-200-011-1042",
+      "tax_pin_corroborated": false,
       "acquired": "2022-04-26",
       "purchase_price": 237500.0,
       "sources": [
@@ -76,6 +84,12 @@
           "action": "Confirm each unit against the Cook County Assessor and the recorded deed, correct the property canon, and regenerate. Do not file an unverified parcel number."
         },
         {
+          "severity": "CRITICAL",
+          "gap": "No source in the record corroborates a parcel identifier for this property.",
+          "consequence": "The property canon carries 14-28-200-011-1042, but that value appears in no verified fact, no indexed exhibit and no document in the store. It is an unsourced assertion, so this schedule does not state it as the parcel identifier. A legal description in a filed exhibit must come from the recorded instrument, not from a convenience table.",
+          "action": "Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate."
+        },
+        {
           "severity": "STRUCTURAL",
           "gap": "Funding components are recorded as amounts applied, not as traced origins.",
           "consequence": "The record establishes what was paid at closing. It does not, on its own, establish the account of origin, the balance in that account before the transfer, or the absence of commingling \u2014 the three elements Illinois tracing requires.",
@@ -94,7 +108,8 @@
       "name": "City Studio",
       "address": "550 W Surf St, Unit C211, Chicago, IL 60657",
       "title_holder": "ARIBIA LLC \u2014 CITY STUDIO (series)",
-      "tax_pin": "31-25-301-019-0000",
+      "tax_pin_on_file": "31-25-301-019-0000",
+      "tax_pin_corroborated": false,
       "acquired": "2022-07-15",
       "purchase_price": 100000.0,
       "sources": [
@@ -121,6 +136,12 @@
           "action": "Verify the municipality and parcel number together."
         },
         {
+          "severity": "CRITICAL",
+          "gap": "No source in the record corroborates a parcel identifier for this property.",
+          "consequence": "The property canon carries 31-25-301-019-0000, but that value appears in no verified fact, no indexed exhibit and no document in the store. It is an unsourced assertion, so this schedule does not state it as the parcel identifier. A legal description in a filed exhibit must come from the recorded instrument, not from a convenience table.",
+          "action": "Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate."
+        },
+        {
           "severity": "STRUCTURAL",
           "gap": "Funding components are recorded as amounts applied, not as traced origins.",
           "consequence": "The record establishes what was paid at closing. It does not, on its own, establish the account of origin, the balance in that account before the transfer, or the absence of commingling \u2014 the three elements Illinois tracing requires.",
@@ -139,7 +160,8 @@
       "name": "Morada Mami",
       "address": "Carrera 76 A # 53-215, Medellin, Antioquia, Colombia",
       "title_holder": "ARIBIA LLC \u2014 MORADA MAMI (series)",
-      "tax_pin": null,
+      "tax_pin_on_file": null,
+      "tax_pin_corroborated": false,
       "acquired": null,
       "purchase_price": null,
       "sources": [],
@@ -167,7 +189,8 @@
       "name": "Villa Vista",
       "address": "4343 N Clarendon Ave, Unit 1610, Chicago, IL 60613",
       "title_holder": "ARIBIA LLC \u2014 APT ARLENE (series)",
-      "tax_pin": "09-12-307-023-0000",
+      "tax_pin_on_file": "09-12-307-023-0000",
+      "tax_pin_corroborated": false,
       "acquired": "2024-06-22",
       "purchase_price": 130000.0,
       "sources": [
@@ -181,6 +204,12 @@
       "classification": "ACQUIRED DURING MARRIAGE",
       "days_from_marriage": 540,
       "gaps": [
+        {
+          "severity": "CRITICAL",
+          "gap": "No source in the record corroborates a parcel identifier for this property.",
+          "consequence": "The property canon carries 09-12-307-023-0000, but that value appears in no verified fact, no indexed exhibit and no document in the store. It is an unsourced assertion, so this schedule does not state it as the parcel identifier. A legal description in a filed exhibit must come from the recorded instrument, not from a convenience table.",
+          "action": "Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate."
+        },
         {
           "severity": "STRUCTURAL",
           "gap": "Funding components are recorded as amounts applied, not as traced origins.",

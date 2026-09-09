@@ -360,6 +360,26 @@ def extract_sources(normalized):
     return sources
 
 
+def pin_is_corroborated(record, pin):
+    """Report whether any source in the record supports this parcel number.
+
+    A parcel identifier carried only in the property canon is an unsourced
+    assertion: `cc_properties` is a convenience table, not an instrument. A PIN
+    is corroborated only if it also appears in a verified fact, an indexed
+    exhibit, or a document in the store — that is, if something a court could be
+    shown says so.
+    """
+    if not pin:
+        return False
+    needle = pin.strip()
+    haystacks = []
+    for key in ("acquisition_facts", "capital_facts", "property_liabilities"):
+        haystacks.extend(json.dumps(row, default=str) for row in record.get(key, []))
+    for key in ("exhibits", "closing_documents"):
+        haystacks.extend((row.get("filename") or "") for row in record.get(key, []))
+    return any(needle in text for text in haystacks)
+
+
 def detect_pin_conflicts(cc_properties):
     """Flag parcel identifiers the record itself shows cannot all be right.
 
@@ -518,6 +538,8 @@ def build_property_analysis(record):
             "address": meta["address"],
             "title_holder": meta["title_holder"],
             "tax_pin": cc["tax_pin"] if cc else None,
+            "tax_pin_corroborated": pin_is_corroborated(
+                record, cc["tax_pin"] if cc else None),
             "mortgage_servicer": (cc or {}).get("mortgage_servicer"),
             "cc_metadata": (cc or {}).get("metadata"),
             "legal_description": meta.get("legal_description"),
@@ -545,6 +567,26 @@ def build_property_analysis(record):
 
         for conflict in pin_conflicts.get(meta["cc_property_name"], []):
             analysis["gaps"].append(conflict)
+
+        if analysis["tax_pin"] and not analysis["tax_pin_corroborated"]:
+            analysis["gaps"].append({
+                "severity": "CRITICAL",
+                "gap": ("No source in the record corroborates a parcel "
+                        "identifier for this property."),
+                "consequence": (
+                    f"The property canon carries {analysis['tax_pin']}, but that "
+                    "value appears in no verified fact, no indexed exhibit and "
+                    "no document in the store. It is an unsourced assertion, so "
+                    "this schedule does not state it as the parcel identifier. "
+                    "A legal description in a filed exhibit must come from the "
+                    "recorded instrument, not from a convenience table."
+                ),
+                "action": (
+                    "Confirm the parcel number against the Cook County Assessor "
+                    "and the recorded deed, seed it as a cited fact, and "
+                    "regenerate."
+                ),
+            })
 
         # The property canon carries its own copy of the acquisition date and
         # price. Where it disagrees with the acquisition fact, the schedule must
@@ -820,8 +862,10 @@ def render_package(record, analyses, generated_at):
         w("")
         w(f"**Address:** {a['address']}  ")
         w(f"**Title holder of record:** {a['title_holder']}  ")
-        if a["tax_pin"]:
+        if a["tax_pin"] and a["tax_pin_corroborated"]:
             w(f"**Cook County PIN:** {a['tax_pin']}  ")
+        elif a["tax_pin"]:
+            w("**Parcel identifier:** NOT IN RECORD — verification required  ")
         if a["legal_description"]:
             w(f"**Legal description:** {a['legal_description']}  ")
         if not a["tax_pin"] and not a["legal_description"]:
@@ -1189,7 +1233,8 @@ def render_dataset(record, analyses, generated_at):
                 "name": a["name"],
                 "address": a["address"],
                 "title_holder": a["title_holder"],
-                "tax_pin": a["tax_pin"],
+                "tax_pin_on_file": a["tax_pin"],
+                "tax_pin_corroborated": a["tax_pin_corroborated"],
                 "acquired": serialize(a["acquired"]),
                 "purchase_price": serialize(a["purchase_price"]),
                 "sources": [

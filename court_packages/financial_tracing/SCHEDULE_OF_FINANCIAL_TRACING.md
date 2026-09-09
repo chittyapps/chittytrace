@@ -16,7 +16,7 @@ This schedule is a **tracing worksheet compiled from a document management syste
 
 Every figure below is read from the underlying database at generation time and carries its source. Where the record contains no figure, this schedule says **NOT IN RECORD** and states the step required to obtain it. No amount in this document is estimated, interpolated, or reconstructed.
 
-**Generated:** September 09, 2026 at 18:06 UTC  
+**Generated:** September 09, 2026 at 18:07 UTC  
 **Source of record:** ChittyOS-Core (Neon `restless-grass-40598426`)  
 **Marital cut-off date:** December 30, 2022  
 **Cut-off authority:** verification.verification_items AS-1.1 (status=verified, confidence=very_high)
@@ -51,7 +51,7 @@ Every figure below is read from the underlying database at generation time and c
 
 **Address:** 541 W Addison St, Unit 3S, Chicago, IL 60613  
 **Title holder of record:** Nicholas Anthony Bianchi (individually)  
-**Cook County PIN:** 14-21-307-032-1006  
+**Parcel identifier:** NOT IN RECORD — verification required  
 **Mortgage servicer(s):** USAA / Mr. Cooper / Rocket Mortgage (current)  
 
 **Classification:** PRE-MARITAL
@@ -104,6 +104,11 @@ Every figure below is read from the underlying database at generation time and c
 
 #### Evidentiary Gaps
 
+**[CRITICAL] No source in the record corroborates a parcel identifier for this property.**
+
+- *Consequence:* The property canon carries 14-21-307-032-1006, but that value appears in no verified fact, no indexed exhibit and no document in the store. It is an unsourced assertion, so this schedule does not state it as the parcel identifier. A legal description in a filed exhibit must come from the recorded instrument, not from a convenience table.
+- *Action required:* Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate.
+
 **[REVIEW] The acquisition date is recorded twice and the two copies disagree: 2019-11-21 against 2019-11-22.**
 
 - *Consequence:* The schedule states the acquisition-fact date and computes the marital-timing calculation from it. The difference does not change the classification here, but an unexplained two-date record invites the question of which one the instrument says.
@@ -120,7 +125,7 @@ Every figure below is read from the underlying database at generation time and c
 
 **Address:** 550 W Surf St, Unit 504, Chicago, IL 60657  
 **Title holder of record:** Nicholas Anthony Bianchi (individually)  
-**Cook County PIN:** 14-28-200-011-1042  
+**Parcel identifier:** NOT IN RECORD — verification required  
 **Mortgage servicer(s):** SoFi  
 
 **Classification:** PRE-MARITAL
@@ -179,6 +184,11 @@ Every figure below is read from the underlying database at generation time and c
 - *Consequence:* The record places these units at the same building (550 w surf st) but assigns them parcel numbers from different areas: City Studio unit #211 → 31-25-301-019-0000; Cozy Castle unit #504 → 14-28-200-011-1042. A Cook County PIN encodes area and block in its leading segments, so units in one building share that prefix. At least one of these identifiers is wrong, and an exhibit citing the wrong parcel describes someone else's property.
 - *Action required:* Confirm each unit against the Cook County Assessor and the recorded deed, correct the property canon, and regenerate. Do not file an unverified parcel number.
 
+**[CRITICAL] No source in the record corroborates a parcel identifier for this property.**
+
+- *Consequence:* The property canon carries 14-28-200-011-1042, but that value appears in no verified fact, no indexed exhibit and no document in the store. It is an unsourced assertion, so this schedule does not state it as the parcel identifier. A legal description in a filed exhibit must come from the recorded instrument, not from a convenience table.
+- *Action required:* Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate.
+
 **[STRUCTURAL] Funding components are recorded as amounts applied, not as traced origins.**
 
 - *Consequence:* The record establishes what was paid at closing. It does not, on its own, establish the account of origin, the balance in that account before the transfer, or the absence of commingling — the three elements Illinois tracing requires.
@@ -195,7 +205,7 @@ Every figure below is read from the underlying database at generation time and c
 
 **Address:** 550 W Surf St, Unit C211, Chicago, IL 60657  
 **Title holder of record:** ARIBIA LLC — CITY STUDIO (series)  
-**Cook County PIN:** 31-25-301-019-0000  
+**Parcel identifier:** NOT IN RECORD — verification required  
 
 **Classification:** PRE-MARITAL
 
@@ -241,6 +251,11 @@ Every figure below is read from the underlying database at generation time and c
 
 - *Consequence:* The property is at 550 W Surf St, Unit C211, Chicago, IL 60657. A municipality that does not match the address usually means the parcel record was copied from a different property, which puts the parcel number recorded alongside it in the same doubt.
 - *Action required:* Verify the municipality and parcel number together.
+
+**[CRITICAL] No source in the record corroborates a parcel identifier for this property.**
+
+- *Consequence:* The property canon carries 31-25-301-019-0000, but that value appears in no verified fact, no indexed exhibit and no document in the store. It is an unsourced assertion, so this schedule does not state it as the parcel identifier. A legal description in a filed exhibit must come from the recorded instrument, not from a convenience table.
+- *Action required:* Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate.
 
 **[STRUCTURAL] Funding components are recorded as amounts applied, not as traced origins.**
 
@@ -320,7 +335,7 @@ Every figure below is read from the underlying database at generation time and c
 
 **Address:** 4343 N Clarendon Ave, Unit 1610, Chicago, IL 60613  
 **Title holder of record:** ARIBIA LLC — APT ARLENE (series)  
-**Cook County PIN:** 09-12-307-023-0000  
+**Parcel identifier:** NOT IN RECORD — verification required  
 
 **Classification:** ACQUIRED DURING MARRIAGE
 
@@ -359,6 +374,11 @@ Every figure below is read from the underlying database at generation time and c
 > 1 of 1 closing instruments for this property are stored as un-OCR'd images. Their line-item figures cannot be compared against the fact base until they are extracted, so the amounts in the schedule above are presently **uncorroborated by their own source documents**.
 
 #### Evidentiary Gaps
+
+**[CRITICAL] No source in the record corroborates a parcel identifier for this property.**
+
+- *Consequence:* The property canon carries 09-12-307-023-0000, but that value appears in no verified fact, no indexed exhibit and no document in the store. It is an unsourced assertion, so this schedule does not state it as the parcel identifier. A legal description in a filed exhibit must come from the recorded instrument, not from a convenience table.
+- *Action required:* Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate.
 
 **[STRUCTURAL] Funding components are recorded as amounts applied, not as traced origins.**
 
@@ -532,16 +552,23 @@ Ordered by the marginal value of closing each gap.
 
 **2. Villa Vista** — exposure $128,000.00; acquired during the marriage, so the marital presumption applies and only tracing defeats it.
 
+   - Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate.
    - Produce the settlement statement and identify every debit funding the shortfall.
 
-**3. Cozy Castle** — exposure $22,500.00; pre-marital, so exposure is limited to contribution and commingling arguments.
+**3. Lakeside Loft** — exposure $202,000.00; pre-marital, so exposure is limited to contribution and commingling arguments.
+
+   - Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate.
+
+**4. Cozy Castle** — exposure $22,500.00; pre-marital, so exposure is limited to contribution and commingling arguments.
 
    - Confirm each unit against the Cook County Assessor and the recorded deed, correct the property canon, and regenerate. Do not file an unverified parcel number.
+   - Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate.
    - Produce the settlement statement and identify every debit funding the shortfall.
 
-**4. City Studio** — exposure $3,940.86; pre-marital, so exposure is limited to contribution and commingling arguments.
+**5. City Studio** — exposure $3,940.86; pre-marital, so exposure is limited to contribution and commingling arguments.
 
    - Confirm each unit against the Cook County Assessor and the recorded deed, correct the property canon, and regenerate. Do not file an unverified parcel number.
+   - Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate.
    - Produce the settlement statement and identify every debit funding the shortfall.
 
 ---
@@ -550,4 +577,4 @@ Ordered by the marginal value of closing each gap.
 
 This schedule was generated programmatically from the ChittyOS-Core forensic record. Its figures are reproducible by re-running the generator against the same database. It has not been reviewed or attested by a certified public accountant, and it is not offered as an expert report.
 
-Generated 2026-09-09 18:06 UTC by `financial_tracing_court_package.py`.
+Generated 2026-09-09 18:07 UTC by `financial_tracing_court_package.py`.
