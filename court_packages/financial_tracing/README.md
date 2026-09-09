@@ -10,7 +10,8 @@ Court-ready tracing schedule for the real property at issue in
 | `SCHEDULE_OF_FINANCIAL_TRACING.md` | The generated schedule. Regenerate; do not hand-edit. |
 | `tracing_dataset.json` | Machine-readable appendix carrying every figure in the schedule. |
 | `record_snapshot.json` | Input record captured from ChittyOS-Core. |
-| `verify_record_snapshot.py` | Proves the snapshot is faithful to the database. |
+| `verify_record_snapshot.py` | Recomputes row counts and money sums from the snapshot, for comparison against the database. |
+| `verify_record_snapshot.sql` | The counterpart aggregation to run against the database. |
 
 The generator is `../../financial_tracing_court_package.py`.
 
@@ -19,11 +20,13 @@ The generator is `../../financial_tracing_court_package.py`.
 Against the live database:
 
 ```bash
+pip install psycopg2-binary   # only needed for the live path
 DATABASE_URL=<ChittyOS-Core> python3 financial_tracing_court_package.py \
     --outdir court_packages/financial_tracing
 ```
 
-Replaying the captured snapshot, which needs no credential:
+Replaying the captured snapshot, which needs neither a credential nor a
+database driver — the `psycopg2` import is deferred into the live path:
 
 ```bash
 python3 financial_tracing_court_package.py \
@@ -40,8 +43,10 @@ safe if the snapshot is provably faithful, so verify it:
 cd court_packages/financial_tracing && python3 verify_record_snapshot.py
 ```
 
-Then run the equivalent aggregation against the database and compare row counts
-and money sums per collection. As captured on 2026-09-09 these matched exactly:
+That reads the snapshot only. The proof is the comparison: run
+`verify_record_snapshot.sql` against ChittyOS-Core and diff its row counts and
+money sums against what the script prints. As captured on 2026-09-09 these
+matched exactly:
 
 | Collection | Rows | Money sum |
 |------------|------|-----------|

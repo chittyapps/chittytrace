@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T17:45:37.359234",
+  "generated_at": "2026-09-09T18:02:09.316854+00:00",
   "case_number": "2024-D-007847",
   "marriage_date": "2022-12-30",
   "marriage_date_authority": "verification.verification_items AS-1.1 (status=verified, confidence=very_high)",
@@ -28,6 +28,12 @@
       "classification": "PRE-MARITAL",
       "days_from_marriage": 1135,
       "gaps": [
+        {
+          "severity": "REVIEW",
+          "gap": "The acquisition date is recorded twice and the two copies disagree: 2019-11-21 against 2019-11-22.",
+          "consequence": "The schedule states the acquisition-fact date and computes the marital-timing calculation from it. The difference does not change the classification here, but an unexplained two-date record invites the question of which one the instrument says.",
+          "action": "Read the recorded deed and reconcile both entries to it."
+        },
         {
           "severity": "STRUCTURAL",
           "gap": "Funding components are recorded as amounts applied, not as traced origins.",
@@ -64,6 +70,12 @@
       "days_from_marriage": 248,
       "gaps": [
         {
+          "severity": "CRITICAL",
+          "gap": "The parcel identifier is inconsistent with the other unit recorded at the same address.",
+          "consequence": "The record places these units at the same building (550 w surf st) but assigns them parcel numbers from different areas: City Studio unit #211 \u2192 31-25-301-019-0000; Cozy Castle unit #504 \u2192 14-28-200-011-1042. A Cook County PIN encodes area and block in its leading segments, so units in one building share that prefix. At least one of these identifiers is wrong, and an exhibit citing the wrong parcel describes someone else's property.",
+          "action": "Confirm each unit against the Cook County Assessor and the recorded deed, correct the property canon, and regenerate. Do not file an unverified parcel number."
+        },
+        {
           "severity": "STRUCTURAL",
           "gap": "Funding components are recorded as amounts applied, not as traced origins.",
           "consequence": "The record establishes what was paid at closing. It does not, on its own, establish the account of origin, the balance in that account before the transfer, or the absence of commingling \u2014 the three elements Illinois tracing requires.",
@@ -96,6 +108,18 @@
       "classification": "PRE-MARITAL",
       "days_from_marriage": 168,
       "gaps": [
+        {
+          "severity": "CRITICAL",
+          "gap": "The parcel identifier is inconsistent with the other unit recorded at the same address.",
+          "consequence": "The record places these units at the same building (550 w surf st) but assigns them parcel numbers from different areas: City Studio unit #211 \u2192 31-25-301-019-0000; Cozy Castle unit #504 \u2192 14-28-200-011-1042. A Cook County PIN encodes area and block in its leading segments, so units in one building share that prefix. At least one of these identifiers is wrong, and an exhibit citing the wrong parcel describes someone else's property.",
+          "action": "Confirm each unit against the Cook County Assessor and the recorded deed, correct the property canon, and regenerate. Do not file an unverified parcel number."
+        },
+        {
+          "severity": "REVIEW",
+          "gap": "The property canon records the municipality as 'Park Forest', which the property's address contradicts.",
+          "consequence": "The property is at 550 W Surf St, Unit C211, Chicago, IL 60657. A municipality that does not match the address usually means the parcel record was copied from a different property, which puts the parcel number recorded alongside it in the same doubt.",
+          "action": "Verify the municipality and parcel number together."
+        },
         {
           "severity": "STRUCTURAL",
           "gap": "Funding components are recorded as amounts applied, not as traced origins.",

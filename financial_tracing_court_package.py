@@ -33,11 +33,8 @@ import json
 import os
 import sys
 from collections import OrderedDict
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from decimal import Decimal
-
-import psycopg2
-import psycopg2.extras
 
 CASE_NUMBER_CANONICAL = "2024-D-007847"
 
@@ -151,6 +148,10 @@ RECORD_KEYS = (
 
 
 def connect():
+    # Imported here, not at module load, so that snapshot replay (--record)
+    # works on a machine with no database driver installed.
+    import psycopg2
+
     dsn = os.environ.get("DATABASE_URL")
     if not dsn:
         sys.exit(
@@ -171,7 +172,7 @@ def load_record_snapshot(path):
     the broker and their results captured as a snapshot, which this function
     replays. The analysis and rendering downstream are identical either way.
     """
-    with open(path) as fh:
+    with open(path, encoding="utf-8") as fh:
         record = json.load(fh)
     missing = [k for k in RECORD_KEYS if k not in record]
     if missing:
@@ -180,6 +181,8 @@ def load_record_snapshot(path):
 
 
 def fetch(conn, sql, params=None):
+    import psycopg2.extras
+
     with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
         cur.execute(sql, params or ())
         return [dict(r) for r in cur.fetchall()]
@@ -348,16 +351,150 @@ def extract_sources(normalized):
     return sources
 
 
+def detect_pin_conflicts(cc_properties):
+    """Flag parcel identifiers the record itself shows cannot all be right.
+
+    Two checks, both decided from the stored data alone — this function never
+    asserts what a PIN ought to be, because substituting a researched parcel
+    number into a court exhibit would be exactly the invention this package
+    refuses to commit.
+
+    1. Units in the same building must share a PIN prefix. A Cook County PIN
+       encodes area, sub-area and block in its leading segments, so two units
+       at one street address that differ there cannot both be correct.
+    2. A stored municipality that contradicts the stored street address.
+    """
+    conflicts = {}
+
+    def add(name, gap):
+        conflicts.setdefault(name, []).append(gap)
+
+    def norm_address(row):
+        return " ".join((row.get("address") or "").split()).rstrip(",").lower()
+
+    by_address = {}
+    for row in cc_properties:
+        by_address.setdefault(norm_address(row), []).append(row)
+
+    for address, rows in by_address.items():
+        if len(rows) < 2:
+            continue
+        prefixes = {}
+        for row in rows:
+            pin = row.get("tax_pin") or ""
+            prefix = "-".join(pin.split("-")[:2])
+            if prefix:
+                prefixes.setdefault(prefix, []).append(row)
+        if len(prefixes) > 1:
+            listed = "; ".join(
+                f"{r['property_name']} unit {r.get('unit') or '?'} → {r.get('tax_pin')}"
+                for r in rows
+            )
+            for row in rows:
+                add(row["property_name"], {
+                    "severity": "CRITICAL",
+                    "gap": ("The parcel identifier is inconsistent with the other "
+                            "unit recorded at the same address."),
+                    "consequence": (
+                        f"The record places these units at the same building "
+                        f"({address}) but assigns them parcel numbers from "
+                        f"different areas: {listed}. A Cook County PIN encodes "
+                        "area and block in its leading segments, so units in one "
+                        "building share that prefix. At least one of these "
+                        "identifiers is wrong, and an exhibit citing the wrong "
+                        "parcel describes someone else's property."
+                    ),
+                    "action": (
+                        "Confirm each unit against the Cook County Assessor and "
+                        "the recorded deed, correct the property canon, and "
+                        "regenerate. Do not file an unverified parcel number."
+                    ),
+                })
+
+    # The stored addresses omit the city, so the municipality is checked against
+    # the curated portfolio address, which carries it.
+    canon_by_name = {
+        meta["cc_property_name"]: meta["address"]
+        for meta in PORTFOLIO.values() if meta.get("cc_property_name")
+    }
+    for row in cc_properties:
+        metadata = row.get("metadata") or {}
+        municipality = (metadata.get("municipality") or "").strip()
+        canon_address = canon_by_name.get(row["property_name"])
+        if not municipality or not canon_address:
+            continue
+        if municipality.lower() in canon_address.lower():
+            continue
+        add(row["property_name"], {
+            "severity": "REVIEW",
+            "gap": (f"The property canon records the municipality as "
+                    f"'{municipality}', which the property's address contradicts."),
+            "consequence": (
+                f"The property is at {canon_address}. A municipality that does "
+                "not match the address usually means the parcel record was "
+                "copied from a different property, which puts the parcel number "
+                "recorded alongside it in the same doubt."
+            ),
+            "action": "Verify the municipality and parcel number together.",
+        })
+
+    return conflicts
+
+
+def canon_disagreements(normalized, cc_row):
+    """Compare an acquisition fact against the property canon's own copy."""
+    gaps = []
+    metadata = cc_row.get("metadata") or {}
+
+    fact_date = normalized.get("date")
+    canon_date = metadata.get("purchase_date")
+    if fact_date and canon_date and fact_date != canon_date:
+        gaps.append({
+            "severity": "REVIEW",
+            "gap": (f"The acquisition date is recorded twice and the two copies "
+                    f"disagree: {fact_date} against {canon_date}."),
+            "consequence": (
+                "The schedule states the acquisition-fact date and computes the "
+                "marital-timing calculation from it. The difference does not "
+                "change the classification here, but an unexplained two-date "
+                "record invites the question of which one the instrument says."
+            ),
+            "action": (
+                "Read the recorded deed and reconcile both entries to it."
+            ),
+        })
+
+    fact_price = dec(normalized.get("sale_price"))
+    canon_price = dec(metadata.get("purchase_price"))
+    if fact_price is not None and canon_price is not None and fact_price != canon_price:
+        gaps.append({
+            "severity": "CRITICAL",
+            "gap": (f"The purchase price is recorded twice and the two copies "
+                    f"disagree: {money(fact_price)} against {money(canon_price)}."),
+            "consequence": (
+                "The schedule cannot state a single acquisition price for this "
+                "property, and every variance computed from it is unreliable."
+            ),
+            "action": "Reconcile both entries against the settlement statement.",
+        })
+
+    return gaps
+
+
 def build_property_analysis(record):
     """Assemble the tracing schedule for each of the five properties."""
     facts_by_property = {}
+    duplicate_fact_keys = set()
     for row in record["acquisition_facts"]:
         nv = row["normalized_value"] or {}
         key = nv.get("property")
         if key:
+            if key in facts_by_property:
+                duplicate_fact_keys.add(key)
             facts_by_property[key] = row
 
     cc_by_name = {r["property_name"]: r for r in record["cc_properties"]}
+    pin_conflicts = detect_pin_conflicts(record["cc_properties"])
 
     analyses = []
     for key, meta in PORTFOLIO.items():
@@ -379,6 +516,32 @@ def build_property_analysis(record):
 
         if meta.get("exhibit_integrity_note"):
             analysis["gaps"].append(meta["exhibit_integrity_note"])
+
+        if key in duplicate_fact_keys:
+            analysis["gaps"].append({
+                "severity": "CRITICAL",
+                "gap": "The fact base carries more than one acquisition fact for this property.",
+                "consequence": (
+                    "The figures below reflect one of several competing facts. "
+                    "The schedule cannot state a single acquisition price on "
+                    "this record, and the competing figure is not shown."
+                ),
+                "action": (
+                    "Resolve the competing acquisition facts and mark the "
+                    "superseded entries."
+                ),
+            })
+
+        for conflict in pin_conflicts.get(meta["cc_property_name"], []):
+            analysis["gaps"].append(conflict)
+
+        # The property canon carries its own copy of the acquisition date and
+        # price. Where it disagrees with the acquisition fact, the schedule must
+        # say so rather than silently preferring one source.
+        if fact is not None and cc:
+            analysis["gaps"].extend(
+                canon_disagreements(fact["normalized_value"] or {}, cc)
+            )
 
         if fact is None:
             analysis.update({
@@ -611,7 +774,20 @@ def render_package(record, analyses, generated_at):
         w(f"**Aggregate documented acquisition cost (of {len(priced)} of {len(analyses)} "
           f"properties):** {money(total_price)}  ")
         w(f"**Aggregate documented funding sources:** {money(total_sources)}  ")
-        w(f"**Aggregate unreconciled:** {money(total_price - total_sources)}")
+        shortfall = sum((abs(a["variance"]) for a in priced
+                         if a["variance"] is not None and a["variance"] < 0),
+                        Decimal("0"))
+        excess = sum((a["variance"] for a in priced
+                      if a["variance"] is not None and a["variance"] > 0),
+                     Decimal("0"))
+        w(f"**Aggregate unsourced balance (shortfalls only):** {money(shortfall)}  ")
+        w(f"**Aggregate excess of sources over price:** {money(excess)}  ")
+        w(f"**Net difference (price less sources):** {money(total_price - total_sources)}")
+        w("")
+        w("> The shortfall and the excess arise on different closings and do not "
+          "offset one another. An excess at one settlement does not fund a "
+          "shortfall at another, so the unsourced balance the record must "
+          f"account for is {money(shortfall)}, not the net figure.")
         w("")
         missing = [a["name"] for a in analyses if a["purchase_price"] is None]
         if missing:
@@ -688,9 +864,9 @@ def render_package(record, analyses, generated_at):
             variance = a["variance"]
             if variance is not None:
                 if variance < 0:
-                    w(f"| D | **Unsourced balance (A − C)** | **{money(abs(variance))}** | **No documented origin** |")
+                    w(f"| D | **Unsourced balance (A − C)** | **{money(abs(variance))}** | **No documented origin** |")  # noqa: RUF001
                 else:
-                    w(f"| D | Excess of sources over price (C − A) | {money(variance)} | Unexplained on this record |")
+                    w(f"| D | Excess of sources over price (C − A) | {money(variance)} | Unexplained on this record |")  # noqa: RUF001
             w("")
             w(f"*Acquisition fact confidence: {a['fact_confidence']} — source: "
               f"`{a['fact_source']}`*")
@@ -925,22 +1101,38 @@ def render_package(record, analyses, generated_at):
         critical = [g for g in a["gaps"] if g["severity"] == "CRITICAL"]
         if not critical:
             continue
-        during_marriage = a["posture"]["classification"] == "ACQUIRED DURING MARRIAGE"
-        exposure = abs(a["variance"]) if a["variance"] and a["variance"] < 0 else a["purchase_price"]
+        exposure = (abs(a["variance"]) if a["variance"] is not None and a["variance"] < 0
+                    else a["purchase_price"])
         ranked.append({
             "name": a["name"],
-            "during_marriage": during_marriage,
+            "classification": a["posture"]["classification"],
+            "exposure_known": exposure is not None,
             "exposure": exposure or Decimal("0"),
             "gaps": critical,
         })
-    ranked.sort(key=lambda r: (not r["during_marriage"], -r["exposure"]))
+
+    # An unquantified exposure cannot be ranked below a quantified one: a
+    # property with no acquisition fact could be worth more than every other
+    # gap combined, and nothing in the record excludes that.
+    ranked.sort(key=lambda r: (
+        r["classification"] != "UNDETERMINED",
+        r["classification"] != "ACQUIRED DURING MARRIAGE",
+        -r["exposure"],
+    ))
 
     for rank, r in enumerate(ranked, start=1):
-        why = ("acquired during the marriage, so the marital presumption applies "
-               "and only tracing defeats it") if r["during_marriage"] else \
-              ("pre-marital, so exposure is limited to contribution and "
-               "commingling arguments")
-        w(f"**{rank}. {r['name']}** — exposure {money(r['exposure'])}; {why}.")
+        if r["classification"] == "ACQUIRED DURING MARRIAGE":
+            why = ("acquired during the marriage, so the marital presumption "
+                   "applies and only tracing defeats it")
+        elif r["classification"] == "PRE-MARITAL":
+            why = ("pre-marital, so exposure is limited to contribution and "
+                   "commingling arguments")
+        else:
+            why = ("unclassified, because the acquisition date is not in the "
+                   "record; the applicable presumption cannot be stated, and "
+                   "the dated instruments on file point toward marital")
+        amount = money(r["exposure"]) if r["exposure_known"] else "NOT IN RECORD"
+        w(f"**{rank}. {r['name']}** — exposure {amount}; {why}.")
         w("")
         for g in r["gaps"]:
             w(f"   - {g['action']}")
@@ -1024,7 +1216,7 @@ def main():
                              "read instead of connecting with a DSN")
     args = parser.parse_args()
 
-    generated_at = datetime.utcnow()
+    generated_at = datetime.now(timezone.utc)
 
     if args.record:
         record = load_record_snapshot(args.record)
@@ -1041,9 +1233,9 @@ def main():
     schedule_path = os.path.join(args.outdir, "SCHEDULE_OF_FINANCIAL_TRACING.md")
     dataset_path = os.path.join(args.outdir, "tracing_dataset.json")
 
-    with open(schedule_path, "w") as fh:
+    with open(schedule_path, "w", encoding="utf-8") as fh:
         fh.write(render_package(record, analyses, generated_at))
-    with open(dataset_path, "w") as fh:
+    with open(dataset_path, "w", encoding="utf-8") as fh:
         fh.write(render_dataset(record, analyses, generated_at))
 
     traced = sum(1 for a in analyses if a["has_acquisition_fact"])

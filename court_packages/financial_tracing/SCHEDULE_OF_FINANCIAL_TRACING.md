@@ -16,7 +16,7 @@ This schedule is a **tracing worksheet compiled from a document management syste
 
 Every figure below is read from the underlying database at generation time and carries its source. Where the record contains no figure, this schedule says **NOT IN RECORD** and states the step required to obtain it. No amount in this document is estimated, interpolated, or reconstructed.
 
-**Generated:** September 09, 2026 at 17:45 UTC  
+**Generated:** September 09, 2026 at 18:02 UTC  
 **Source of record:** ChittyOS-Core (Neon `restless-grass-40598426`)  
 **Marital cut-off date:** December 30, 2022  
 **Cut-off authority:** verification.verification_items AS-1.1 (status=verified, confidence=very_high)
@@ -35,7 +35,11 @@ Every figure below is read from the underlying database at generation time and c
 
 **Aggregate documented acquisition cost (of 4 of 5 properties):** $669,500.00  
 **Aggregate documented funding sources:** $515,859.14  
-**Aggregate unreconciled:** $153,640.86
+**Aggregate unsourced balance (shortfalls only):** $154,440.86  
+**Aggregate excess of sources over price:** $800.00  
+**Net difference (price less sources):** $153,640.86
+
+> The shortfall and the excess arise on different closings and do not offset one another. An excess at one settlement does not fund a shortfall at another, so the unsourced balance the record must account for is $154,440.86, not the net figure.
 
 > The aggregate excludes Morada Mami, for which the record contains no acquisition figure at all. The true portfolio cost is therefore higher than the total stated above by an unknown amount.
 
@@ -99,6 +103,11 @@ Every figure below is read from the underlying database at generation time and c
 > 6 of 6 closing instruments for this property are stored as un-OCR'd images. Their line-item figures cannot be compared against the fact base until they are extracted, so the amounts in the schedule above are presently **uncorroborated by their own source documents**.
 
 #### Evidentiary Gaps
+
+**[REVIEW] The acquisition date is recorded twice and the two copies disagree: 2019-11-21 against 2019-11-22.**
+
+- *Consequence:* The schedule states the acquisition-fact date and computes the marital-timing calculation from it. The difference does not change the classification here, but an unexplained two-date record invites the question of which one the instrument says.
+- *Action required:* Read the recorded deed and reconcile both entries to it.
 
 **[STRUCTURAL] Funding components are recorded as amounts applied, not as traced origins.**
 
@@ -165,6 +174,11 @@ Every figure below is read from the underlying database at generation time and c
 
 #### Evidentiary Gaps
 
+**[CRITICAL] The parcel identifier is inconsistent with the other unit recorded at the same address.**
+
+- *Consequence:* The record places these units at the same building (550 w surf st) but assigns them parcel numbers from different areas: City Studio unit #211 → 31-25-301-019-0000; Cozy Castle unit #504 → 14-28-200-011-1042. A Cook County PIN encodes area and block in its leading segments, so units in one building share that prefix. At least one of these identifiers is wrong, and an exhibit citing the wrong parcel describes someone else's property.
+- *Action required:* Confirm each unit against the Cook County Assessor and the recorded deed, correct the property canon, and regenerate. Do not file an unverified parcel number.
+
 **[STRUCTURAL] Funding components are recorded as amounts applied, not as traced origins.**
 
 - *Consequence:* The record establishes what was paid at closing. It does not, on its own, establish the account of origin, the balance in that account before the transfer, or the absence of commingling — the three elements Illinois tracing requires.
@@ -217,6 +231,16 @@ Every figure below is read from the underlying database at generation time and c
 > 1 of 1 closing instruments for this property are stored as un-OCR'd images. Their line-item figures cannot be compared against the fact base until they are extracted, so the amounts in the schedule above are presently **uncorroborated by their own source documents**.
 
 #### Evidentiary Gaps
+
+**[CRITICAL] The parcel identifier is inconsistent with the other unit recorded at the same address.**
+
+- *Consequence:* The record places these units at the same building (550 w surf st) but assigns them parcel numbers from different areas: City Studio unit #211 → 31-25-301-019-0000; Cozy Castle unit #504 → 14-28-200-011-1042. A Cook County PIN encodes area and block in its leading segments, so units in one building share that prefix. At least one of these identifiers is wrong, and an exhibit citing the wrong parcel describes someone else's property.
+- *Action required:* Confirm each unit against the Cook County Assessor and the recorded deed, correct the property canon, and regenerate. Do not file an unverified parcel number.
+
+**[REVIEW] The property canon records the municipality as 'Park Forest', which the property's address contradicts.**
+
+- *Consequence:* The property is at 550 W Surf St, Unit C211, Chicago, IL 60657. A municipality that does not match the address usually means the parcel record was copied from a different property, which puts the parcel number recorded alongside it in the same doubt.
+- *Action required:* Verify the municipality and parcel number together.
 
 **[STRUCTURAL] Funding components are recorded as amounts applied, not as traced origins.**
 
@@ -501,22 +525,24 @@ The following items are verified at high confidence and are the strongest materi
 
 Ordered by the marginal value of closing each gap.
 
-**1. Villa Vista** — exposure $128,000.00; acquired during the marriage, so the marital presumption applies and only tracing defeats it.
-
-   - Produce the settlement statement and identify every debit funding the shortfall.
-
-**2. Cozy Castle** — exposure $22,500.00; pre-marital, so exposure is limited to contribution and commingling arguments.
-
-   - Produce the settlement statement and identify every debit funding the shortfall.
-
-**3. City Studio** — exposure $3,940.86; pre-marital, so exposure is limited to contribution and commingling arguments.
-
-   - Produce the settlement statement and identify every debit funding the shortfall.
-
-**4. Morada Mami** — exposure $0.00; pre-marital, so exposure is limited to contribution and commingling arguments.
+**1. Morada Mami** — exposure NOT IN RECORD; unclassified, because the acquisition date is not in the record; the applicable presumption cannot be stated, and the dated instruments on file point toward marital.
 
    - Re-label this instrument as chain of title. Obtain the 2023 escritura de compraventa recording transfer to ARIBIA LLC, together with its certificado de tradicion y libertad.
    - Extract the purchase instrument and settlement figures, seed them as atomic facts, then re-run this generator.
+
+**2. Villa Vista** — exposure $128,000.00; acquired during the marriage, so the marital presumption applies and only tracing defeats it.
+
+   - Produce the settlement statement and identify every debit funding the shortfall.
+
+**3. Cozy Castle** — exposure $22,500.00; pre-marital, so exposure is limited to contribution and commingling arguments.
+
+   - Confirm each unit against the Cook County Assessor and the recorded deed, correct the property canon, and regenerate. Do not file an unverified parcel number.
+   - Produce the settlement statement and identify every debit funding the shortfall.
+
+**4. City Studio** — exposure $3,940.86; pre-marital, so exposure is limited to contribution and commingling arguments.
+
+   - Confirm each unit against the Cook County Assessor and the recorded deed, correct the property canon, and regenerate. Do not file an unverified parcel number.
+   - Produce the settlement statement and identify every debit funding the shortfall.
 
 ---
 
@@ -524,4 +550,4 @@ Ordered by the marginal value of closing each gap.
 
 This schedule was generated programmatically from the ChittyOS-Core forensic record. Its figures are reproducible by re-running the generator against the same database. It has not been reviewed or attested by a certified public accountant, and it is not offered as an expert report.
 
-Generated 2026-09-09 17:45 UTC by `financial_tracing_court_package.py`.
+Generated 2026-09-09 18:02 UTC by `financial_tracing_court_package.py`.
