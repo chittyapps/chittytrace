@@ -148,6 +148,7 @@ RECORD_KEYS = (
 
 
 def connect():
+    """Open a read-only connection to ChittyOS-Core from DATABASE_URL."""
     # Imported here, not at module load, so that snapshot replay (--record)
     # works on a machine with no database driver installed.
     import psycopg2
@@ -181,6 +182,7 @@ def load_record_snapshot(path):
 
 
 def fetch(conn, sql, params=None):
+    """Run one query and return its rows as plain dicts."""
     import psycopg2.extras
 
     with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
@@ -276,18 +278,25 @@ def load_record(conn):
 # --------------------------------------------------------------------------
 
 def dec(value):
+    """Convert a JSON number to Decimal, preserving None for absent figures."""
     if value is None:
         return None
     return Decimal(str(value))
 
 
 def money(value):
+    """Render an amount for the schedule, or NOT IN RECORD when absent.
+
+    Absent figures must never render as $0.00: a zero states that nothing was
+    paid, while the record here states only that no amount is known.
+    """
     if value is None:
         return "NOT IN RECORD"
     return f"${value:,.2f}"
 
 
 def parse_iso(value):
+    """Parse a YYYY-MM-DD string into a date, or None when absent."""
     if not value:
         return None
     return datetime.strptime(value, "%Y-%m-%d").date()
@@ -367,9 +376,11 @@ def detect_pin_conflicts(cc_properties):
     conflicts = {}
 
     def add(name, gap):
+        """Attach a gap to the named property."""
         conflicts.setdefault(name, []).append(gap)
 
     def norm_address(row):
+        """Normalise a stored address for comparison across rows."""
         return " ".join((row.get("address") or "").split()).rstrip(",").lower()
 
     by_address = {}
@@ -707,6 +718,7 @@ def audit_contradictions(record):
 # --------------------------------------------------------------------------
 
 def render_package(record, analyses, generated_at):
+    """Render the full Cook County tracing schedule as Markdown."""
     case = record["case"][0] if record["case"] else {}
     genuine, artifacts = audit_contradictions(record)
 
@@ -1157,6 +1169,7 @@ def render_package(record, analyses, generated_at):
 def render_dataset(record, analyses, generated_at):
     """Machine-readable appendix carrying every figure in the schedule."""
     def serialize(value):
+        """Coerce Decimal and date values into JSON-representable types."""
         if isinstance(value, Decimal):
             return float(value)
         if isinstance(value, (date, datetime)):
@@ -1207,6 +1220,7 @@ def render_dataset(record, analyses, generated_at):
 # --------------------------------------------------------------------------
 
 def main():
+    """Generate the tracing package from the database or a snapshot."""
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--outdir", default="court_packages/financial_tracing",
