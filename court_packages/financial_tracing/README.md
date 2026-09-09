@@ -44,9 +44,17 @@ cd court_packages/financial_tracing && python3 verify_record_snapshot.py
 ```
 
 That reads the snapshot only. The proof is the comparison: run
-`verify_record_snapshot.sql` against ChittyOS-Core and diff its row counts and
-money sums against what the script prints. As captured on 2026-09-09 these
-matched exactly:
+`verify_record_snapshot.sql` against ChittyOS-Core and diff its output against
+what the script prints.
+
+Row counts and money sums do not by themselves establish fidelity. A collection
+carrying no money total — `cc_properties` — would pass a count-only check with
+altered values, and its `tax_pin`, `mortgage_servicer` and `metadata` fields are
+load-bearing: `metadata.purchase_price` feeds a CRITICAL cross-check against the
+acquisition fact. The second query in the `.sql` therefore digests those field
+values, and the script prints the matching digest. Both must agree.
+
+As captured on 2026-09-09 they did:
 
 | Collection | Rows | Money sum |
 |------------|------|-----------|
@@ -59,6 +67,8 @@ matched exactly:
 | contradictions | 21 | — |
 | blockers | 13 | — |
 | verified_items | 20 | — |
+
+`cc_properties` value digest: `e28464e7a4e9d1e113a2b822e71a6886`
 
 ## Standing rule for this package
 

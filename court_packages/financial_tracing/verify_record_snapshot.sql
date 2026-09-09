@@ -7,7 +7,10 @@
 -- figure in the court package will move one of these numbers.
 --
 -- The `money` column is 0 for collections that carry no independent monetary
--- figure of their own; those are verified by row count alone.
+-- figure of their own. A row count alone does NOT establish that such a
+-- collection is faithful — an altered value would pass unnoticed — so the
+-- second query below digests the cc_properties field values the generator
+-- actually consumes. Run both, and compare both against the script's output.
 
 SELECT 'acquisition_facts' AS collection, count(*) AS rows,
        sum( COALESCE((normalized_value->>'sale_price')::numeric, 0)
@@ -68,3 +71,36 @@ SELECT 'verified_items', count(*), 0 FROM verification.verification_items
 WHERE deleted_at IS NULL AND status = 'verified'
 
 ORDER BY 1;
+
+-- ---------------------------------------------------------------------------
+-- cc_properties value digest.
+--
+-- cc_properties contributes no money total, so the aggregate above verifies it
+-- by row count only. Its values are nonetheless load-bearing: the generator
+-- reads tax_pin, mortgage_servicer and metadata for parcel checks, and
+-- metadata.purchase_price feeds a CRITICAL cross-check against the acquisition
+-- fact. This digest must equal the "cc_properties value digest" line printed by
+-- verify_record_snapshot.py. Field order, the whitespace normalization and the
+-- \x1f / \x1e separators are matched to that script deliberately — changing
+-- either side alone silently disables the check.
+
+SELECT md5(string_agg(row_digest, E'\x1e' ORDER BY property_name))
+       AS cc_properties_value_digest
+FROM (
+  SELECT property_name,
+    concat_ws(E'\x1f',
+      btrim(regexp_replace(coalesce(property_name, ''), '\s+', ' ', 'g')),
+      btrim(regexp_replace(coalesce(address, ''), '\s+', ' ', 'g')),
+      btrim(regexp_replace(coalesce(unit, ''), '\s+', ' ', 'g')),
+      btrim(regexp_replace(coalesce(property_type, ''), '\s+', ' ', 'g')),
+      btrim(regexp_replace(coalesce(tax_pin, ''), '\s+', ' ', 'g')),
+      btrim(regexp_replace(coalesce(mortgage_servicer, ''), '\s+', ' ', 'g')),
+      btrim(regexp_replace(coalesce(metadata->>'purchase_date', ''), '\s+', ' ', 'g')),
+      btrim(regexp_replace(coalesce(metadata->>'purchase_price', ''), '\s+', ' ', 'g')),
+      btrim(regexp_replace(coalesce(metadata->>'municipality', ''), '\s+', ' ', 'g')),
+      btrim(regexp_replace(coalesce(metadata->>'state', ''), '\s+', ' ', 'g')),
+      btrim(regexp_replace(coalesce(metadata->>'county', ''), '\s+', ' ', 'g')),
+      btrim(regexp_replace(coalesce(metadata->>'lender', ''), '\s+', ' ', 'g'))
+    ) AS row_digest
+  FROM public.cc_properties
+) z;

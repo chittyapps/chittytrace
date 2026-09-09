@@ -1157,13 +1157,24 @@ def render_package(record, analyses, generated_at):
         critical = [g for g in a["gaps"] if g["severity"] == "CRITICAL"]
         if not critical:
             continue
-        exposure = (abs(a["variance"]) if a["variance"] is not None and a["variance"] < 0
-                    else a["purchase_price"])
+        # Two different quantities can drive a ranking, and they must not be
+        # reported under one word. An unsourced balance is money whose origin is
+        # unproven; a full acquisition cost is the whole property standing on a
+        # gap of another kind. Printing "$202,000 exposure" for a pre-marital
+        # property whose only defect is an unverified parcel number would
+        # overstate it grossly.
+        if a["variance"] is not None and a["variance"] < 0:
+            exposure = abs(a["variance"])
+            basis = "unsourced balance"
+        else:
+            exposure = a["purchase_price"]
+            basis = "full acquisition cost at risk"
         ranked.append({
             "name": a["name"],
             "classification": a["posture"]["classification"],
             "exposure_known": exposure is not None,
             "exposure": exposure or Decimal("0"),
+            "exposure_basis": basis,
             "gaps": critical,
         })
 
@@ -1187,7 +1198,10 @@ def render_package(record, analyses, generated_at):
             why = ("unclassified, because the acquisition date is not in the "
                    "record; the applicable presumption cannot be stated, and "
                    "the dated instruments on file point toward marital")
-        amount = money(r["exposure"]) if r["exposure_known"] else "NOT IN RECORD"
+        if r["exposure_known"]:
+            amount = f"{money(r['exposure'])} ({r['exposure_basis']})"
+        else:
+            amount = "NOT IN RECORD"
         w(f"**{rank}. {r['name']}** — exposure {amount}; {why}.")
         w("")
         for g in r["gaps"]:

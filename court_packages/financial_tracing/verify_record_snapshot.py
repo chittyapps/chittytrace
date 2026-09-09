@@ -32,12 +32,28 @@ from financial_tracing_court_package import SOURCE_KEYS  # noqa: E402
 # Every key whose value is money, for the recursive collection totals. The
 # funding-source keys come from the generator; the rest name amounts that appear
 # only outside acquisition facts.
-MONEY_KEYS = tuple(k for k in SOURCE_KEYS if k != "deposits") + (
+MONEY_KEYS = (
+    *SOURCE_KEYS,
     "amount", "sale_price", "valuation", "documented_purchase_offers",
 )
 
-# Source keys holding a list of amounts rather than a single one.
-LIST_SOURCE_KEYS = ("deposits",)
+
+def coerce(value):
+    """Convert one money value exactly as the generator's `dec()` does.
+
+    Shape handling is deliberately identical to `extract_sources`: any key may
+    hold a list, and a scalar may arrive as a numeric string. Special-casing a
+    single key here — as an earlier version did for `deposits` — lets the
+    verifier miss precisely the value the generator counted.
+    """
+    if value is None:
+        return Decimal("0")
+    if isinstance(value, list):
+        return sum((coerce(v) for v in value), Decimal("0"))
+    try:
+        return Decimal(str(value))
+    except (ArithmeticError, ValueError):
+        return Decimal("0")
 
 
 def money_sum(node):
@@ -45,10 +61,8 @@ def money_sum(node):
     total = Decimal("0")
     if isinstance(node, dict):
         for key, value in node.items():
-            if key in LIST_SOURCE_KEYS and isinstance(value, list):
-                total += sum(Decimal(str(v)) for v in value)
-            elif key in MONEY_KEYS and isinstance(value, (int, float)):
-                total += Decimal(str(value))
+            if key in MONEY_KEYS:
+                total += coerce(value)
             else:
                 total += money_sum(value)
     elif isinstance(node, list):
@@ -59,16 +73,41 @@ def money_sum(node):
 
 def fact_sources(normalized):
     """Total the documented funding components of one acquisition fact."""
-    total = Decimal("0")
-    for key in SOURCE_KEYS:
-        if key not in normalized:
-            continue
-        value = normalized[key]
-        if isinstance(value, list):
-            total += sum(Decimal(str(v)) for v in value)
-        elif isinstance(value, (int, float)):
-            total += Decimal(str(value))
-    return total
+    return sum((coerce(normalized[key]) for key in SOURCE_KEYS
+                if key in normalized), Decimal("0"))
+
+
+# Fields of cc_properties the generator actually consumes, in a fixed order.
+# The collection carries no money total of its own, so a row count alone would
+# let an altered tax_pin, servicer or metadata value pass verification unnoticed
+# — and metadata.purchase_price feeds a CRITICAL cross-check in the schedule.
+CC_PROPERTY_FIELDS = (
+    "property_name", "address", "unit", "property_type", "tax_pin",
+    "mortgage_servicer",
+)
+CC_METADATA_FIELDS = (
+    "purchase_date", "purchase_price", "municipality", "state", "county", "lender",
+)
+
+
+def norm_field(value):
+    """Collapse whitespace so the digest is insensitive to stray tabs/newlines."""
+    if value is None:
+        return ""
+    return " ".join(str(value).split())
+
+
+def cc_properties_digest(rows):
+    """Digest cc_properties field values, for comparison against the database."""
+    import hashlib
+
+    parts = []
+    for row in sorted(rows, key=lambda r: r.get("property_name") or ""):
+        metadata = row.get("metadata") or {}
+        values = [norm_field(row.get(f)) for f in CC_PROPERTY_FIELDS]
+        values += [norm_field(metadata.get(f)) for f in CC_METADATA_FIELDS]
+        parts.append("\x1f".join(values))
+    return hashlib.md5("\x1e".join(parts).encode("utf-8")).hexdigest()
 
 
 def main():
@@ -86,6 +125,9 @@ def main():
     # Invariants the court package depends on directly. A partial acquisition
     # fact is a state the package is built to report, so the verifier reports it
     # too rather than failing on it.
+    print()
+    print(f"cc_properties value digest: {cc_properties_digest(record['cc_properties'])}")
+
     print()
     print("acquisition invariants:")
     for fact in record["acquisition_facts"]:
