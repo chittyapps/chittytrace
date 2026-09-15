@@ -102,3 +102,5 @@ certificates/
 # Private implementations
 *_private.py
 *_arias_*.py
+# Wrangler local state
+.wrangler/

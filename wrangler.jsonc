@@ -1,0 +1,50 @@
+{
+  "name": "flow-analyzer",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-07",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "hyperdrive": [
+    {
+      "binding": "CHITTYOS_CORE_DB",
+      "id": "1d126444cff1416cb415447e6cc6d15a"
+    },
+    {
+      "binding": "SERVICE_SCOPE_DB",
+      "id": "a41987b2faff4acc92d4570117c65f94"
+    },
+    {
+      "binding": "TRACE_DB",
+      "id": "a41987b2faff4acc92d4570117c65f94"
+    }
+  ],
+  "vars": {
+    "ENVIRONMENT": "production"
+  },
+  "build": {
+    "command": "npm run build",
+    "cwd": "./",
+    "watch_dir": "src"
+  },
+  "rules": [
+    {
+      "type": "ESModule",
+      "globs": [
+        "**/*.js"
+      ]
+    }
+  ],
+  "placement": {
+    "mode": "smart"
+  },
+  "observability": {
+    "enabled": false,
+    "head_sampling_rate": 0,
+    "logs": {
+      "enabled": false,
+      "head_sampling_rate": 0,
+      "invocation_logs": false
+    }
+  }
+}

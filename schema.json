@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "flow-analyzer (Cloudflare Worker) /health response",
+  "description": "Response contract for GET /health on the Cloudflare Worker defined by src/index.js and wrangler.jsonc (worker name: flow-analyzer).\n\nNOTE: this repository contains a SECOND, unrelated /health endpoint \u2014 the FastAPI app in claude_openai_extension.py:124, which returns {\"status\":\"healthy\",\"services\":{...}} and is covered by tests/integration/test_api_endpoints.py. The two services have different shapes by design; this schema describes only the Worker.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok"
+      ]
+    },
+    "service": {
+      "type": "string",
+      "enum": [
+        "ChittyTrace - Flow Analyzer API"
+      ]
+    },
+    "hyperdrive": {
+      "type": "boolean",
+      "description": "True when the CHITTYOS_CORE_DB Hyperdrive binding is present."
+    }
+  },
+  "required": [
+    "status",
+    "service",
+    "hyperdrive"
+  ],
+  "additionalProperties": false
+}
