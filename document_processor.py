@@ -6,7 +6,7 @@ from typing import Dict, List, Optional, Any
 from datetime import datetime
 import logging
 
-import pypdf2
+import PyPDF2
 import pdfplumber
 import pandas as pd
 import chardet
@@ -74,7 +74,7 @@ class DocumentProcessor:
             # Fallback to PyPDF2
             try:
                 with open(file_path, 'rb') as f:
-                    reader = pypdf2.PdfReader(f)
+                    reader = PyPDF2.PdfReader(f)
                     for page in reader.pages:
                         text += page.extract_text() + "\n"
             except Exception as e:
