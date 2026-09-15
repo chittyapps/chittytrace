@@ -1,11 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "chittytrace API Schema",
+  "title": "chittytrace /health response",
+  "description": "Response contract for GET /health as implemented in src/index.js.",
   "type": "object",
   "properties": {
-    "service": { "type": "string", "enum": ["chittytrace"] },
-    "status": { "type": "string" },
-    "timestamp": { "type": "string", "format": "date-time" }
+    "status": { "type": "string", "enum": ["ok"] },
+    "service": { "type": "string", "enum": ["ChittyTrace - Flow Analyzer API"] },
+    "hyperdrive": {
+      "type": "boolean",
+      "description": "True when the CHITTYOS_CORE_DB Hyperdrive binding is present."
+    }
   },
-  "required": ["service", "status", "timestamp"]
+  "required": ["status", "service", "hyperdrive"],
+  "additionalProperties": false
 }
