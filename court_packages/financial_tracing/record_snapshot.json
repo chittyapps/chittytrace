@@ -1,0 +1,281 @@
+{
+  "_snapshot_metadata": {
+    "captured_at": "2026-09-09",
+    "source_database": "ChittyOS-Core (Neon restless-grass-40598426)",
+    "capture_method": "brokered read-only SQL via Neon MCP; no DSN handled by the operator",
+    "note": "Replay input for financial_tracing_court_package.py --record. Verified against the database by row counts and numeric checksums; see verify_record_snapshot.py."
+  },
+  "case": [
+    {
+      "case_number": "2024 D 007847",
+      "case_number_canonical": "2024-D-007847",
+      "title": "Luisa Fernanda Arias Montealegre v. Nicholas Anthony Jones Bianchi",
+      "jurisdiction": "Cook County Circuit Court — Domestic Relations Division (DRCAL23, Courtroom 2108, Hon. Robert W. Johnson)",
+      "status": "active"
+    }
+  ],
+  "acquisition_facts": [
+    {
+      "statement": "Property purchase — 541 W Addison 3S (§11.1)",
+      "confidence": 0.95,
+      "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §11.1",
+      "normalized_value": {
+        "date": "2019-11-21",
+        "loan": 181800.00,
+        "currency": "USD",
+        "property": "541_W_Addison_3S",
+        "wire_USAA": 21000.00,
+        "sale_price": 202000.00
+      }
+    },
+    {
+      "statement": "Property purchase — 550 W Surf #504 Cozy Castle (§11.1)",
+      "confidence": 0.95,
+      "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §11.1",
+      "normalized_value": {
+        "date": "2022-04-26",
+        "loan": 190000.00,
+        "currency": "USD",
+        "deposits": [20000.00, 5000.00],
+        "property": "550_W_Surf_504_Cozy_Castle",
+        "sale_price": 237500.00
+      }
+    },
+    {
+      "statement": "Property purchase — 550 W Surf #211 City Studio (§11.1)",
+      "confidence": 0.95,
+      "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §11.1",
+      "normalized_value": {
+        "date": "2022-07-15",
+        "wire": 96059.14,
+        "currency": "USD",
+        "property": "550_W_Surf_211_City_Studio",
+        "sale_price": 100000.00,
+        "payment_type": "cash"
+      }
+    },
+    {
+      "statement": "Property purchase — 4343 N Clarendon Apt Arlene (§11.1)",
+      "confidence": 0.95,
+      "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §11.1",
+      "normalized_value": {
+        "date": "2024-06-22",
+        "deposit": 2000.00,
+        "currency": "USD",
+        "property": "4343_N_Clarendon_Apt_Arlene",
+        "sale_price": 130000.00
+      }
+    }
+  ],
+  "capital_facts": [
+    {
+      "statement": "Capital contribution — canonical MSJ forensic tracing (§4.6, §10.5, §11.16)",
+      "confidence": 0.95,
+      "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §4.6, §10.5, §11.16",
+      "normalized_value": {"amount": 818895.23, "source": "MSJ_USAA_tracing", "status": "canonical", "currency": "USD"}
+    },
+    {
+      "statement": "ARIBIA verifiable member funds total (§10)",
+      "confidence": 0.90,
+      "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §10",
+      "normalized_value": {"amount": 327421.75, "entity": "ARIBIA", "category": "verifiable_member_funds", "currency": "USD"}
+    },
+    {
+      "statement": "Capital contribution — Notion summary (§4.6) SUPERSEDED",
+      "confidence": 0.70,
+      "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §4.6 Notion",
+      "normalized_value": {"amount": 240000.00, "source": "Notion_summary", "status": "superseded", "currency": "USD", "breakdown": {"initial": 120000, "Medellin": 90000, "Apt_Arlene": 30000}}
+    },
+    {
+      "statement": "ARIBIA capital — direct member contributions (§10)",
+      "confidence": 0.90,
+      "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §10",
+      "normalized_value": {"amount": 214987.00, "entity": "ARIBIA", "category": "direct_contributions", "currency": "USD"}
+    },
+    {
+      "statement": "ARIBIA capital — initial deposit (§10)",
+      "confidence": 0.95,
+      "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §10",
+      "normalized_value": {"amount": 101059.00, "entity": "ARIBIA", "category": "initial_deposit", "currency": "USD"}
+    },
+    {
+      "statement": "ARIBIA capital contributed by Petitioner (§10)",
+      "confidence": 0.95,
+      "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §10",
+      "normalized_value": {"amount": 0.00, "entity": "ARIBIA", "currency": "USD", "contributor": "Petitioner"}
+    }
+  ],
+  "property_liabilities": [
+    {"statement": "Arrears owed by Luisa Arias — consolidated tally", "confidence": 0.85, "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §4.5", "normalized_value": {"amount": 24966.86, "obligor": "Luisa Arias", "category": "arrears_consolidated", "currency": "USD"}},
+    {"statement": "Arrears owed by Luisa Arias — primary tally (§4.1 ledger row C)", "confidence": 0.95, "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §4.1, §4.5", "normalized_value": {"amount": 17820.00, "obligor": "Luisa Arias", "category": "arrears", "currency": "USD", "ledger_row": "C"}},
+    {"statement": "Cards arrears owed by Luisa (§4.5)", "confidence": 0.90, "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §4.5, §11.16", "normalized_value": {"amount": 702.36, "source": "cards", "category": "arrears_component", "currency": "USD"}},
+    {"statement": "Cozy Castle arrears owed by Luisa (§4.5)", "confidence": 0.95, "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §4.5, §11.16", "normalized_value": {"amount": 13820.00, "source": "Cozy", "category": "arrears_component", "currency": "USD"}},
+    {"statement": "Cozy Castle deferred rent as of 2025-03-01 (§11.6)", "confidence": 0.95, "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §11.6, §11.16", "normalized_value": {"as_of": "2025-03-01", "amount": 18750.34, "category": "deferred_rent", "currency": "USD", "property": "Cozy_Castle"}},
+    {"statement": "Medellín arrears owed by Luisa (§4.5)", "confidence": 0.90, "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §4.5", "normalized_value": {"amount": 4000.00, "source": "Medellin", "category": "arrears_component", "currency": "USD"}},
+    {"statement": "Petitioner liability — Cozy Castle arrearage (§10, §11.6)", "confidence": 0.95, "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §10, §11.6, §11.16", "normalized_value": {"as_of": "2025-03-01", "amount": 18750.34, "obligor": "Petitioner", "category": "deferred_rent", "currency": "USD", "property": "Cozy_Castle"}},
+    {"statement": "Petitioner liability — unpaid rent (§10)", "confidence": 0.95, "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §10, §11.16", "normalized_value": {"amount": 17820.00, "obligor": "Petitioner", "category": "unpaid_rent", "currency": "USD"}},
+    {"statement": "Property valuation — adequate remedy evidence (§10)", "confidence": 0.95, "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §10, §11.16", "normalized_value": {"currency": "USD", "valuation": 756000.00, "documented_purchase_offers": 137120.00}},
+    {"statement": "SNAP-related arrears owed by Luisa (§4.5)", "confidence": 0.85, "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §4.5", "normalized_value": {"amount": 1644.50, "source": "SNAP", "category": "arrears_component", "currency": "USD"}},
+    {"statement": "Wireless arrears owed by Luisa (§4.5)", "confidence": 0.90, "source_reference": "NICHOLAS_SUPPORT_FINDINGS.md §4.5, §11.16", "normalized_value": {"amount": 1473.09, "source": "wireless", "category": "arrears_component", "currency": "USD"}}
+  ],
+  "cc_properties": [
+    {"property_name": "City Studio", "address": "550 W Surf St\t\n", "unit": "#211", "property_type": "residential", "tax_pin": "31-25-301-019-0000", "mortgage_servicer": null, "metadata": {"state": "IL", "county": "Cook", "municipality": "Park Forest"}},
+    {"property_name": "Cozy Castle", "address": "550 W Surf St", "unit": "#504", "property_type": "residential", "tax_pin": "14-28-200-011-1042", "mortgage_servicer": "SoFi\t\n", "metadata": {"lender": "SoFi", "purchase_date": "2022-04-26", "purchase_price": 237500}},
+    {"property_name": "Lakeside Loft", "address": "541 W Addison St", "unit": "#3S", "property_type": "residential", "tax_pin": "14-21-307-032-1006", "mortgage_servicer": "USAA\nMr. Cooper\nRocket Mortgage (current)", "metadata": {"lender": "USAA", "purchase_date": "2019-11-22", "purchase_price": 202000}},
+    {"property_name": "Villa Vista", "address": "4343 N Clarendon", "unit": "#1610", "property_type": "residential", "tax_pin": "09-12-307-023-0000", "mortgage_servicer": null, "metadata": {"state": "IL", "county": "Cook", "municipality": "Chicago"}}
+  ],
+  "exhibits": [
+    {"exhibit_id": "Exh0022", "category": "Property Deed", "filename": "2019-11-19 - Warranty Deed 541 W Addison 3S Pre Marital Non Marital.pdf"},
+    {"exhibit_id": "Exh0023", "category": "Other", "filename": "2019-11-22 - Mortgage 541 W Addison St 3S Pre Marital (BIANCHI).pdf"},
+    {"exhibit_id": "Exh0025", "category": "Other", "filename": "2019-11-22 - Various Forms 541 W Addison St 3S Pre Marital Non Marital.pdf"},
+    {"exhibit_id": "Exh0026", "category": "Property Deed", "filename": "2019-11-22 - Warranty Deed 541 W Addison 3S Pre marital (Bianchi).pdf"},
+    {"exhibit_id": "Exh0027", "category": "Property Deed", "filename": "2019-11-22 - Warranty Deed 541 W Addison 3S Pre marital (Bianchi).txt"},
+    {"exhibit_id": "Exh0028", "category": "Financial Statement", "filename": "2019-12-02 - Statement 541 W Addison 3S Premarital Non Marital (BIANCHI).pdf"},
+    {"exhibit_id": "Exh0029", "category": "Other", "filename": "2019-12-23 - Closing Disclosure 541 W Addison 3S Pre Marital (Bianchi).pdf"},
+    {"exhibit_id": "Exh0032", "category": "Financial Statement", "filename": "2022 2023 Bianchi Fidelity Statements for Morada Mami.zip"},
+    {"exhibit_id": "Exh0038", "category": "Other", "filename": "2022-03-19 - 550 W Surf 504 documents Executed Illinois Purchase.txt"},
+    {"exhibit_id": "Exh0039", "category": "Other", "filename": "2022-03-19 - Earnest Money First Payment proof of payment.pdf"},
+    {"exhibit_id": "Exh0040", "category": "Other", "filename": "2022-03-19 - Executed Illinois Purchase Contract 550 W Surf St, Unit 504.pdf"},
+    {"exhibit_id": "Exh0041", "category": "Receipt/Invoice", "filename": "2022-04-04 - Receipt - 550 W Surf 504 Earnest Money.pdf"},
+    {"exhibit_id": "Exh0042", "category": "Receipt/Invoice", "filename": "2022-04-04 - Receipt - EARRNEST Earnest Money (504).pdf"},
+    {"exhibit_id": "Exh0043", "category": "Financial Statement", "filename": "2022-04-22 - 550 W Surf Apt 504 Final Statement.pdf"},
+    {"exhibit_id": "Exh0044", "category": "Financial Statement", "filename": "2022-04-22 - ALTA Statement 550 W Surf 504 (BIANCHI PREMARITAL).pdf"},
+    {"exhibit_id": "Exh0045", "category": "Financial Statement", "filename": "2022-04-22 - ALTA Statement 550 W Surf 504.pdf"},
+    {"exhibit_id": "Exh0047", "category": "Financial Statement", "filename": "2022-04-26 - ALTA STATEMENT 550 W Surf St 504 Pre Marital Non Marital.pdf"},
+    {"exhibit_id": "Exh0048", "category": "Receipt/Invoice", "filename": "2022-04-26 - Receipt - USAA Wire $20000 BIANCHI PREMARITAL (504).pdf"},
+    {"exhibit_id": "Exh0049", "category": "Other", "filename": "2022-04-26 - UNMARRIED Person Addedum 550 W Surf St 504 Pre Marital Non.pdf"},
+    {"exhibit_id": "Exh0056", "category": "Property Deed", "filename": "2022-06-03 - Unofficial Deed 550 W Surf Apt 504 (BIANCHI PREMARITAL).pdf"},
+    {"exhibit_id": "Exh0057", "category": "Wire Transfer", "filename": "2022-07-05 - USAA Wire Earnest Money (211) BIANCHI.pdf"},
+    {"exhibit_id": "Exh0062", "category": "Property Deed", "filename": "2022-07-13 - 550 W Surf #211 Original Deed.pdf"},
+    {"exhibit_id": "Exh0063", "category": "Property Deed", "filename": "2022-07-13 - Deed 550 W Surf 211 (Unofficial).pdf"},
+    {"exhibit_id": "Exh0070", "category": "Wire Transfer", "filename": "2022-07-18 - Wire for City Studio BIANCHI NICHOLAS USAA DocumentC8D24BD0.pdf"},
+    {"exhibit_id": "Exh0071", "category": "Financial Statement", "filename": "2022-07-20 - Executed Master Statement (211).pdf"},
+    {"exhibit_id": "Exh0072", "category": "Receipt/Invoice", "filename": "2022-07-20 - Receipt - USAA Wire $96,059 (211) 2.pdf"},
+    {"exhibit_id": "Exh0073", "category": "Receipt/Invoice", "filename": "2022-07-20 - Receipt - USAA Wire $96,059 (211).pdf"},
+    {"exhibit_id": "Exh0074", "category": "Property Deed", "filename": "2022-07-26 - 550 W Surf Apt 211 Deed.pdf"},
+    {"exhibit_id": "Exh0085", "category": "Other", "filename": "2023 Fridge Purchased purchased for condo in medellin.JPG"},
+    {"exhibit_id": "Exh0090", "category": "Financial Statement", "filename": "2023-01-00 - FIdelity Account Records.zip"},
+    {"exhibit_id": "Exh0113", "category": "Wire Transfer", "filename": "2023-04-28 - Wire to ARIBIA BIANCHI NICHOLAS USAA DocumentCD47CA9A FBAA.pdf"},
+    {"exhibit_id": "Exh0116", "category": "Other", "filename": "2023-05-01 - For medellin purchase Bianchi PERSONAL worksheet.pdf"},
+    {"exhibit_id": "Exh0129", "category": "Lease/Agreement", "filename": "2023-06-07 - Lease Agreement - Nick Bianchi W Addison 3S 06 01 2023.pdf"},
+    {"exhibit_id": "Exh0135", "category": "Other", "filename": "2023-07-06 - Morada Mami Purchase Written Consent 2.pdf"},
+    {"exhibit_id": "Exh0136", "category": "Other", "filename": "2023-07-06 - Morada Mami Purchase Written Consent.pdf"},
+    {"exhibit_id": "Exh0143", "category": "Other", "filename": "2023-07-28 - OTROSI #2 N. Bianchi con membrete (2) (signed).pdf"},
+    {"exhibit_id": "Exh0144", "category": "Other", "filename": "2023-07-29 - OTROSI #1 N. Bianchi (signed) 2.pdf"},
+    {"exhibit_id": "Exh0145", "category": "Other", "filename": "2023-07-29 - OTROSI #1 N. Bianchi (signed).pdf"},
+    {"exhibit_id": "Exh0146", "category": "Other", "filename": "2023-07-29 - OTROSI #1 N. Bianchi (signed).txt"},
+    {"exhibit_id": "Exh0150", "category": "Other", "filename": "2023-08-30 - Inventory Checklist Addison 2.docx"},
+    {"exhibit_id": "Exh0151", "category": "Other", "filename": "2023-08-30 - Inventory Checklist Addison 3.docx"},
+    {"exhibit_id": "Exh0152", "category": "Other", "filename": "2023-08-30 - Inventory Checklist Addison.docx"},
+    {"exhibit_id": "Exh0153", "category": "Lease/Agreement", "filename": "2023-09-01 - Lease - Morada Mami Camilo Arias.pdf"},
+    {"exhibit_id": "Exh0156", "category": "Lease/Agreement", "filename": "2023-09-05 - Lease Agreement - Berger Addison 10 01 2023.pdf"},
+    {"exhibit_id": "Exh0176", "category": "Other", "filename": "2023-11-12 - bianchi 550 w surf mortgage payments history.numbers"},
+    {"exhibit_id": "Exh0177", "category": "Other", "filename": "2023-11-12 - bianchi 550 w surf mortgage payments history.xlsx"},
+    {"exhibit_id": "Exh0199", "category": "Other", "filename": "2024 APT ARLENE Appliances Lowes Credit.pdf"},
+    {"exhibit_id": "Exh0204", "category": "Other", "filename": "2024-01-05 - 550 W Surf 504 documents Surf 504 January 5, 2024 Pay Rent.txt"},
+    {"exhibit_id": "Exh0239", "category": "Other", "filename": "2024-03-15 - ARIBIA LLC APT ARLENE Registration.pdf"},
+    {"exhibit_id": "Exh0245", "category": "Other", "filename": "2024-03-15 - ARIBIA LLC MORADA MAMI Registration.pdf"},
+    {"exhibit_id": "Exh0248", "category": "Lease/Agreement", "filename": "2024-03-15 - Operating Agreement - ARIBIA LLC APT ARLENE Revised.pdf"},
+    {"exhibit_id": "Exh0249", "category": "Lease/Agreement", "filename": "2024-03-15 - Operating Agreement - ARIBIA LLC APT ARLENE.pdf"},
+    {"exhibit_id": "Exh0250", "category": "Lease/Agreement", "filename": "2024-03-15 - Operating Agreement - ARIBIA LLC APT ARLENE.txt"},
+    {"exhibit_id": "Exh0251", "category": "Lease/Agreement", "filename": "2024-03-15 - Operating Agreement - New Folder With Items ARIBIA LLC APT ARLENE Revised (1).txt"},
+    {"exhibit_id": "Exh0291", "category": "Property Deed", "filename": "2024-05-27 - DEED OF TRUST ARIBIA LLC x JONES.docx"},
+    {"exhibit_id": "Exh0296", "category": "Property Deed", "filename": "2024-05-28 - Immediate Action Quitclaim Deeds.pdf"},
+    {"exhibit_id": "Exh0297", "category": "Financial Statement", "filename": "2024-05-31 - Nick shared Cozy Castle Luisa Arias Final Statement with you.eml"}
+  ],
+  "closing_documents": [
+    {"chitty_id": "scan-464f040954d5", "filename": "2019 11 19 Warranty Deed 541 W Addison 3S Pre-Marital - Non-Marital (Bianchi).pdf", "size_bytes": 655818, "source_platform": "consolidation", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-de346cabf10f", "filename": "2019 11 19 Warranty Deed 541 W Addison 3S Pre-Marital - Non-Marital (Bianchi).pdf", "size_bytes": 655818, "source_platform": "manual", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-a7f80c551d7a", "filename": "2019 11 22 Warranty Deed 541 W Addison 3S Pre-marital (Bianchi).pdf", "size_bytes": 2030755, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-d269ee721b45", "filename": "2019 11 22 Warranty Deed 541 W Addison 3S Pre-marital (Bianchi).pdf", "size_bytes": 2030755, "source_platform": "consolidation", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-3796267a8d89", "filename": "2019 12 23 Closing Disclosure 541 W Addison 3S Pre-Marital (Bianchi).pdf", "size_bytes": 1732113, "source_platform": "consolidation", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-63fc0cb33ee3", "filename": "2019 12 23 Closing Disclosure 541 W Addison 3S Pre-Marital (Bianchi)_1.pdf", "size_bytes": 1732113, "source_platform": "manual", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-ff9eb0e4231f", "filename": "2022 04 22 - 550 W Surf Apt 504 Final Statement.pdf", "size_bytes": 5282480, "source_platform": "consolidation", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-65b8effd8d35", "filename": "2022 04 22 - ALTA Statement 550 W Surf 504.pdf", "size_bytes": 5308010, "source_platform": "consolidation", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-eb0a1d26ffac", "filename": "2022 04 22 - ALTA Statement 550 W Surf 504.pdf", "size_bytes": 5308010, "source_platform": "manual", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-2d490aed3997", "filename": "2022 04 22 550 W Surf Apt 504 Final Statement.pdf", "size_bytes": 5282480, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-0cd022332fec", "filename": "2022 04 22 ALTA Statement 550 W Surf 504 (BIANCHI PREMARITAL).pdf", "size_bytes": 5322512, "source_platform": "consolidation", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-39b4aca60263", "filename": "2022 04 22 ALTA Statement 550 W Surf 504 (BIANCHI PREMARITAL).pdf", "size_bytes": 5322512, "source_platform": "manual", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-98f99555bd07", "filename": "2022 04 26 ALTA STATEMENT 550 W Surf St 504 Pre-Marital - Non-Marital (BIANCHI).pdf", "size_bytes": 13570529, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-cc10e9da0e3e", "filename": "2022 04 26 ALTA STATEMENT 550 W Surf St 504 Pre-Marital - Non-Marital (BIANCHI).pdf", "size_bytes": 13570529, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-bf8a0fbb0b7e", "filename": "2022 07 20 Fully Executed Master Statement.pdf", "size_bytes": 271287, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-8cd481d8fcc9", "filename": "2023 07 18 Medellin Property Contract OTROSI 2 - N. Bianchi con membrete 2 signed.pdf", "size_bytes": 217020, "source_platform": "consolidation", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-826a9e29cad7", "filename": "2023 07 29 OTROSÍ #1 - N. Bianchi (signed).pdf", "size_bytes": 117117, "source_platform": "consolidation", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-3720a39956d3", "filename": "2024 06 22 4343 Clarendon (2024) Aribia - Master Statement - Fully Executed.pdf", "size_bytes": 157610, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-138b3ad0dd3c", "filename": "Altair Relocation 2017_Bianchi_N_2017-20412.pdf", "size_bytes": 180501, "source_platform": "r2_scan", "text_extracted": true, "char_count": 420},
+    {"chitty_id": "scan-0d9ca1143f5f", "filename": "Escritura publica 1524 del 13 de febrero de 2008.pdf", "size_bytes": 6983044, "source_platform": "consolidation", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-b832ea874816", "filename": "Escritura publica 1524 del 13 de febrero de 2008.txt", "size_bytes": 18084, "source_platform": "consolidation", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-6f8e83ce87ea", "filename": "Escritura pública 1524 del 13 de febrero de 2008.docx", "size_bytes": 64159, "source_platform": "r2_scan", "text_extracted": true, "char_count": 20510},
+    {"chitty_id": "scan-7838339debbd", "filename": "Escritura pública 1524 del 13 de febrero de 2008.docx", "size_bytes": 64159, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-a499e0363a1f", "filename": "Escritura pública 1524 del 13 de febrero de 2008.docx", "size_bytes": 64159, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-d3fa323a93f2", "filename": "Morada Mami Deed Escritura pública 1524 del 13 de febrero de 2008.pdf", "size_bytes": 6983044, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-32b51a7c7cfb", "filename": "OTROSÍ #1 - N. Bianchi (signed).docx", "size_bytes": 12480, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-c292b0516681", "filename": "OTROSÍ #1 - N. Bianchi (signed).docx", "size_bytes": 12480, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-27cfca719c96", "filename": "OTROSÍ #1 - N. Bianchi (signed).pdf", "size_bytes": 182781, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-7df84e6f70e2", "filename": "OTROSÍ #1 - N. Bianchi (signed).pdf", "size_bytes": 182781, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-0002f915425b", "filename": "OTROSÍ #2 - N. Bianchi con membrete (2) (signed).docx", "size_bytes": 12579, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-b56978202d67", "filename": "OTROSÍ #2 - N. Bianchi con membrete (2) (signed).docx", "size_bytes": 12579, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-f0f25c84bf3a", "filename": "OTROSÍ #2 - N. Bianchi con membrete (2) (signed).pdf", "size_bytes": 217020, "source_platform": "r2_scan", "text_extracted": false, "char_count": 0},
+    {"chitty_id": "scan-21b740f7bfd8", "filename": "Surf 211 Fully Executed Master Statement.pdf", "size_bytes": 271287, "source_platform": "consolidation", "text_extracted": false, "char_count": 0}
+  ],
+  "contradictions": [
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 818895.23, "source": "MSJ_USAA_tracing", "status": "canonical", "currency": "USD"}, "normalized_value2": {"amount": 240000.00, "source": "Notion_summary", "status": "superseded", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 101059.00, "entity": "ARIBIA", "category": "initial_deposit", "currency": "USD"}, "normalized_value2": {"amount": 240000.00, "source": "Notion_summary", "status": "superseded", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 101059.00, "entity": "ARIBIA", "category": "initial_deposit", "currency": "USD"}, "normalized_value2": {"amount": 818895.23, "source": "MSJ_USAA_tracing", "status": "canonical", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 214987.00, "entity": "ARIBIA", "category": "direct_contributions", "currency": "USD"}, "normalized_value2": {"amount": 240000.00, "source": "Notion_summary", "status": "superseded", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 214987.00, "entity": "ARIBIA", "category": "direct_contributions", "currency": "USD"}, "normalized_value2": {"amount": 818895.23, "source": "MSJ_USAA_tracing", "status": "canonical", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 214987.00, "entity": "ARIBIA", "category": "direct_contributions", "currency": "USD"}, "normalized_value2": {"amount": 101059.00, "entity": "ARIBIA", "category": "initial_deposit", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 327421.75, "entity": "ARIBIA", "category": "verifiable_member_funds", "currency": "USD"}, "normalized_value2": {"amount": 240000.00, "source": "Notion_summary", "status": "superseded", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 327421.75, "entity": "ARIBIA", "category": "verifiable_member_funds", "currency": "USD"}, "normalized_value2": {"amount": 818895.23, "source": "MSJ_USAA_tracing", "status": "canonical", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 327421.75, "entity": "ARIBIA", "category": "verifiable_member_funds", "currency": "USD"}, "normalized_value2": {"amount": 101059.00, "entity": "ARIBIA", "category": "initial_deposit", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 327421.75, "entity": "ARIBIA", "category": "verifiable_member_funds", "currency": "USD"}, "normalized_value2": {"amount": 214987.00, "entity": "ARIBIA", "category": "direct_contributions", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 0.00, "entity": "ARIBIA", "currency": "USD", "contributor": "Petitioner"}, "normalized_value2": {"amount": 240000.00, "source": "Notion_summary", "status": "superseded", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 0.00, "entity": "ARIBIA", "currency": "USD", "contributor": "Petitioner"}, "normalized_value2": {"amount": 818895.23, "source": "MSJ_USAA_tracing", "status": "canonical", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 0.00, "entity": "ARIBIA", "currency": "USD", "contributor": "Petitioner"}, "normalized_value2": {"amount": 101059.00, "entity": "ARIBIA", "category": "initial_deposit", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 0.00, "entity": "ARIBIA", "currency": "USD", "contributor": "Petitioner"}, "normalized_value2": {"amount": 214987.00, "entity": "ARIBIA", "category": "direct_contributions", "currency": "USD"}},
+    {"contradiction_type": "capital_contribution", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=capital_contribution has divergent normalized_value", "normalized_value1": {"amount": 0.00, "entity": "ARIBIA", "currency": "USD", "contributor": "Petitioner"}, "normalized_value2": {"amount": 327421.75, "entity": "ARIBIA", "category": "verifiable_member_funds", "currency": "USD"}},
+    {"contradiction_type": "property_purchase_price", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=property_purchase_price has divergent normalized_value", "normalized_value1": {"date": "2022-04-26", "property": "550_W_Surf_504_Cozy_Castle", "sale_price": 237500.00}, "normalized_value2": {"date": "2019-11-21", "property": "541_W_Addison_3S", "sale_price": 202000.00}},
+    {"contradiction_type": "property_purchase_price", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=property_purchase_price has divergent normalized_value", "normalized_value1": {"date": "2022-07-15", "property": "550_W_Surf_211_City_Studio", "sale_price": 100000.00}, "normalized_value2": {"date": "2019-11-21", "property": "541_W_Addison_3S", "sale_price": 202000.00}},
+    {"contradiction_type": "property_purchase_price", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=property_purchase_price has divergent normalized_value", "normalized_value1": {"date": "2022-07-15", "property": "550_W_Surf_211_City_Studio", "sale_price": 100000.00}, "normalized_value2": {"date": "2022-04-26", "property": "550_W_Surf_504_Cozy_Castle", "sale_price": 237500.00}},
+    {"contradiction_type": "property_purchase_price", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=property_purchase_price has divergent normalized_value", "normalized_value1": {"date": "2024-06-22", "property": "4343_N_Clarendon_Apt_Arlene", "sale_price": 130000.00}, "normalized_value2": {"date": "2019-11-21", "property": "541_W_Addison_3S", "sale_price": 202000.00}},
+    {"contradiction_type": "property_purchase_price", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=property_purchase_price has divergent normalized_value", "normalized_value1": {"date": "2024-06-22", "property": "4343_N_Clarendon_Apt_Arlene", "sale_price": 130000.00}, "normalized_value2": {"date": "2022-04-26", "property": "550_W_Surf_504_Cozy_Castle", "sale_price": 237500.00}},
+    {"contradiction_type": "property_purchase_price", "severity": "medium", "status": "open", "description": "Auto-detected contradiction: fact_type=property_purchase_price has divergent normalized_value", "normalized_value1": {"date": "2024-06-22", "property": "4343_N_Clarendon_Apt_Arlene", "sale_price": 130000.00}, "normalized_value2": {"date": "2022-07-15", "property": "550_W_Surf_211_City_Studio", "sale_price": 100000.00}}
+  ],
+  "blockers": [
+    {"item_type": "assertion", "statement": "Drive zip archives not yet inspected. Chittystorage-sasquatch currently extracting; backfill atomic facts and verification items once content hashes land.", "status": "extracted", "confidence_level": null},
+    {"item_type": "assertion", "statement": "Letter of Engagement #2 figures not yet extracted. Obtain document and seed atomic facts for retainer, scope, and hourly rates.", "status": "extracted", "confidence_level": null},
+    {"item_type": "assertion", "statement": "Current respondent counsel of record uncertain - Vanguard listed in some filings, but pro se status indicated in others. Confirm via docket lookup.", "status": "pending_review", "confidence_level": null},
+    {"item_type": "assertion", "statement": "DIRECTV settlement allocation conflict: components $32,083.33 + $42,778.78 + $21,388.89 (sum=$96,251.00) vs aggregate $192,500.00. Reconcile basis.", "status": "pending_review", "confidence_level": null},
+    {"item_type": "assertion", "statement": "Filing-date conflict: Notion records case filing as 2024-01-01 while MSJ records 2024-10-22. Resolve canonical filing date.", "status": "pending_review", "confidence_level": null},
+    {"item_type": "assertion", "statement": "Forensic accountant sign-off pending for $818,895.23 USAA tracing analysis. Need CPA attestation before locking as evidentiary canonical.", "status": "pending_review", "confidence_level": null},
+    {"item_type": "assertion", "statement": "Petitioner counsel of record: Berlin Melzer vs Gurney Law - conflicting filings, determine current counsel.", "status": "pending_review", "confidence_level": null},
+    {"item_type": "assertion", "statement": "Property valuation methodology unclear: $756,000 valuation cited in §10 needs appraisal source identification (Zillow vs licensed appraiser vs comparable sales).", "status": "pending_review", "confidence_level": null},
+    {"item_type": "assertion", "statement": "Seven duplicate copies of 2024-12-24 NOM (Notice of Motion) PDFs found in Drive. Determine canonical filed copy via court docket comparison.", "status": "pending_review", "confidence_level": null},
+    {"item_type": "assertion", "statement": "Six duplicate Nicholas Bianchi contributions sheets discovered in Drive. Determine canonical sheet and mark duplicates as superseded.", "status": "pending_review", "confidence_level": null},
+    {"item_type": "assertion", "statement": "Three early December 2025 affidavit pages discovered without clear parent document; reconstruct from court docket or original PDF.", "status": "pending_review", "confidence_level": null},
+    {"item_type": "assertion", "statement": "Two affidavits dated 2025-12-06 discovered; need to determine if duplicates or distinct evidentiary submissions and reconcile signatures.", "status": "pending_review", "confidence_level": null},
+    {"item_type": "assertion", "statement": "November 2019 deed recording details for 541 W Addison 3S partially confirmed; recording number and exact recording date still need verification from Cook County Recorder.", "status": "under_review", "confidence_level": null}
+  ],
+  "verified_items": [
+    {"item_type": "assertion", "statement": "AS-1.1: ARIBIA LLC was formed and operationalized BEFORE the marriage existed. Operating Agreement dated August 1, 2022 precedes marriage on December 30, 2022 by 151 days.", "value": {"assertion_id": "AS-1.1", "temporal_gap_days": 151}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "assertion", "statement": "AS-1.2: Nicholas Bianchi funded ARIBIA LLC with $122,500 of pre-marital separate property. Luisa Arias contributed $0.", "value": {"assertion_id": "AS-1.2", "luisa_contribution": 0, "nicholas_contribution": 122500}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "assertion", "statement": "AS-2.1: Luisa Arias is bound by Section XII of the Operating Agreement. Both parties signed the agreement on August 1, 2022, forming a valid contract.", "value": {"assertion_id": "AS-2.1"}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "assertion", "statement": "AS-2.2: Mediation is a contractual condition precedent to filing suit. Section XII requires \"mediation before filing suit\".", "value": {"assertion_id": "AS-2.2"}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "assertion", "statement": "AS-5.1: Dissolution petition was filed within approximately 1 day of Luisa receiving formal removal notice. Removal notice: October 21, 2024. Dissolution filed: October 22, 2024.", "value": {"assertion_id": "AS-5.1", "gap_days": 1}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "assertion", "statement": "Capital contribution conflict: Notion summary $240,000 vs MSJ forensic tracing $818,895.23. RESOLVED - canonical value is $818,895.23 per §10.5 + §11.16.", "value": null, "status": "verified", "confidence_level": null},
+    {"item_type": "claim", "statement": "CL-1.1: ARIBIA LLC is pre-marital separate property, not a marital asset. Formation (July 2022) and capitalization (August 2022) occurred 5+ months before marriage (December 2022).", "value": {"claim_id": "CL-1.1", "legal_standard": "Illinois Marital Property Law - 750 ILCS 5/503"}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "claim", "statement": "CL-2.1: Petitioner breached the Operating Agreement by filing suit without mediation. Section XII mandatory mediation clause was bypassed.", "value": {"claim_id": "CL-2.1"}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "claim", "statement": "CL-5.1: Dissolution filing occurred in immediate response to corporate removal. 1-day gap between removal notice and filing demonstrates retaliatory timing.", "value": {"claim_id": "CL-5.1"}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "fact", "statement": "Formal removal notice dated October 21, 2024", "value": "2024-10-21", "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "fact", "statement": "Luisa Arias formally notified of removal from ARIBIA LLC", "value": {"entity": "ARIBIA LLC", "removed_party": "Luisa Arias"}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "fact", "statement": "Luisa Arias made no initial capital contribution (blank)", "value": {"amount": 0, "member": "Luisa Arias", "currency": "USD"}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "fact", "statement": "Luisa Arias received 10% membership interest", "value": {"member": "Luisa Arias", "percentage": 10}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "fact", "statement": "Luisa F Arias signed Operating Agreement on 08/01/2022", "value": {"date": "2022-08-01", "signatory": "Luisa F Arias"}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "fact", "statement": "Nicholas A Bianchi contributed $122,500.00 as initial contribution", "value": {"amount": 122500, "member": "Nicholas A Bianchi", "currency": "USD"}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "fact", "statement": "Nicholas A Bianchi signed Operating Agreement on 08/01/2022", "value": {"date": "2022-08-01", "signatory": "Nicholas A Bianchi"}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "fact", "statement": "Operating Agreement effective date is August 01, 2022", "value": "2022-08-01", "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "fact", "statement": "Removal grounds include $17,820 delinquent payments", "value": {"amount": 17820, "category": "delinquent_payments", "currency": "USD"}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "fact", "statement": "Section XII requires mediation before filing suit: \"All Members agree to enter into mediation before filing suit against any other Member or the Company for any dispute arising from this Agreement or Company.\"", "value": {"page": 16, "section": "XII", "requirement": "mandatory_mediation"}, "status": "verified", "confidence_level": "very_high"},
+    {"item_type": "fact", "statement": "Unanimous consent effective date October 14, 2024", "value": "2024-10-14", "status": "verified", "confidence_level": "very_high"}
+  ]
+}

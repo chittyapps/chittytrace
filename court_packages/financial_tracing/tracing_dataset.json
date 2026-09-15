@@ -1,0 +1,287 @@
+{
+  "generated_at": "2026-09-09T19:03:06.328475+00:00",
+  "case_number": "2024-D-007847",
+  "marriage_date": "2022-12-30",
+  "marriage_date_authority": "verification.verification_items AS-1.1 (status=verified, confidence=very_high)",
+  "source_database": "ChittyOS-Core (restless-grass-40598426)",
+  "properties": [
+    {
+      "key": "541_W_Addison_3S",
+      "name": "Lakeside Loft",
+      "address": "541 W Addison St, Unit 3S, Chicago, IL 60613",
+      "title_holder": "Nicholas Anthony Bianchi (individually)",
+      "tax_pin_on_file": "14-21-307-032-1006",
+      "tax_pin_corroborated": false,
+      "acquired": "2019-11-21",
+      "purchase_price": 202000.0,
+      "sources": [
+        {
+          "component": "loan",
+          "amount": 181800.0
+        },
+        {
+          "component": "wire_USAA",
+          "amount": 21000.0
+        }
+      ],
+      "sources_total": 202800.0,
+      "variance": 800.0,
+      "classification": "PRE-MARITAL",
+      "days_from_marriage": 1135,
+      "gaps": [
+        {
+          "severity": "CRITICAL",
+          "gap": "No source in the record corroborates a parcel identifier for this property.",
+          "consequence": "The property canon carries 14-21-307-032-1006, but that value appears in no verified fact, no indexed exhibit and no document in the store. It is an unsourced assertion, so this schedule does not state it as the parcel identifier. A legal description in a filed exhibit must come from the recorded instrument, not from a convenience table.",
+          "action": "Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate."
+        },
+        {
+          "severity": "REVIEW",
+          "gap": "The acquisition date is recorded twice and the two copies disagree: 2019-11-21 against 2019-11-22.",
+          "consequence": "The schedule states the acquisition-fact date and computes the marital-timing calculation from it. The difference does not change the classification here, but an unexplained two-date record invites the question of which one the instrument says.",
+          "action": "Read the recorded deed and reconcile both entries to it."
+        },
+        {
+          "severity": "STRUCTURAL",
+          "gap": "Funding components are recorded as amounts applied, not as traced origins.",
+          "consequence": "The record establishes what was paid at closing. It does not, on its own, establish the account of origin, the balance in that account before the transfer, or the absence of commingling \u2014 the three elements Illinois tracing requires.",
+          "action": "Obtain the originating account statements covering the 60 days before each transfer and seed the balances as atomic facts."
+        }
+      ]
+    },
+    {
+      "key": "550_W_Surf_504_Cozy_Castle",
+      "name": "Cozy Castle",
+      "address": "550 W Surf St, Unit 504, Chicago, IL 60657",
+      "title_holder": "Nicholas Anthony Bianchi (individually)",
+      "tax_pin_on_file": "14-28-200-011-1042",
+      "tax_pin_corroborated": false,
+      "acquired": "2022-04-26",
+      "purchase_price": 237500.0,
+      "sources": [
+        {
+          "component": "loan",
+          "amount": 190000.0
+        },
+        {
+          "component": "deposits[1]",
+          "amount": 20000.0
+        },
+        {
+          "component": "deposits[2]",
+          "amount": 5000.0
+        }
+      ],
+      "sources_total": 215000.0,
+      "variance": -22500.0,
+      "classification": "PRE-MARITAL",
+      "days_from_marriage": 248,
+      "gaps": [
+        {
+          "severity": "CRITICAL",
+          "gap": "The parcel identifier is inconsistent with the other unit recorded at the same address.",
+          "consequence": "The record places these units at the same building (550 w surf st) but assigns them parcel numbers from different areas: City Studio unit #211 \u2192 31-25-301-019-0000; Cozy Castle unit #504 \u2192 14-28-200-011-1042. A Cook County PIN encodes area and block in its leading segments, so units in one building share that prefix. At least one of these identifiers is wrong, and an exhibit citing the wrong parcel describes someone else's property.",
+          "action": "Confirm each unit against the Cook County Assessor and the recorded deed, correct the property canon, and regenerate. Do not file an unverified parcel number."
+        },
+        {
+          "severity": "CRITICAL",
+          "gap": "No source in the record corroborates a parcel identifier for this property.",
+          "consequence": "The property canon carries 14-28-200-011-1042, but that value appears in no verified fact, no indexed exhibit and no document in the store. It is an unsourced assertion, so this schedule does not state it as the parcel identifier. A legal description in a filed exhibit must come from the recorded instrument, not from a convenience table.",
+          "action": "Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate."
+        },
+        {
+          "severity": "STRUCTURAL",
+          "gap": "Funding components are recorded as amounts applied, not as traced origins.",
+          "consequence": "The record establishes what was paid at closing. It does not, on its own, establish the account of origin, the balance in that account before the transfer, or the absence of commingling \u2014 the three elements Illinois tracing requires.",
+          "action": "Obtain the originating account statements covering the 60 days before each transfer and seed the balances as atomic facts."
+        },
+        {
+          "severity": "CRITICAL",
+          "gap": "Documented sources fall $22,500.00 short of the purchase price.",
+          "consequence": "An unsourced balance at closing is the single most effective target for a marital-contribution argument: money whose origin is unproven is presumed marital.",
+          "action": "Produce the settlement statement and identify every debit funding the shortfall."
+        }
+      ]
+    },
+    {
+      "key": "550_W_Surf_211_City_Studio",
+      "name": "City Studio",
+      "address": "550 W Surf St, Unit C211, Chicago, IL 60657",
+      "title_holder": "ARIBIA LLC \u2014 CITY STUDIO (series)",
+      "tax_pin_on_file": "31-25-301-019-0000",
+      "tax_pin_corroborated": false,
+      "acquired": "2022-07-15",
+      "purchase_price": 100000.0,
+      "sources": [
+        {
+          "component": "wire",
+          "amount": 96059.14
+        }
+      ],
+      "sources_total": 96059.14,
+      "variance": -3940.86,
+      "classification": "PRE-MARITAL",
+      "days_from_marriage": 168,
+      "gaps": [
+        {
+          "severity": "CRITICAL",
+          "gap": "The parcel identifier is inconsistent with the other unit recorded at the same address.",
+          "consequence": "The record places these units at the same building (550 w surf st) but assigns them parcel numbers from different areas: City Studio unit #211 \u2192 31-25-301-019-0000; Cozy Castle unit #504 \u2192 14-28-200-011-1042. A Cook County PIN encodes area and block in its leading segments, so units in one building share that prefix. At least one of these identifiers is wrong, and an exhibit citing the wrong parcel describes someone else's property.",
+          "action": "Confirm each unit against the Cook County Assessor and the recorded deed, correct the property canon, and regenerate. Do not file an unverified parcel number."
+        },
+        {
+          "severity": "REVIEW",
+          "gap": "The property canon records the municipality as 'Park Forest', which the property's address contradicts.",
+          "consequence": "The property is at 550 W Surf St, Unit C211, Chicago, IL 60657. A municipality that does not match the address usually means the parcel record was copied from a different property, which puts the parcel number recorded alongside it in the same doubt.",
+          "action": "Verify the municipality and parcel number together."
+        },
+        {
+          "severity": "CRITICAL",
+          "gap": "No source in the record corroborates a parcel identifier for this property.",
+          "consequence": "The property canon carries 31-25-301-019-0000, but that value appears in no verified fact, no indexed exhibit and no document in the store. It is an unsourced assertion, so this schedule does not state it as the parcel identifier. A legal description in a filed exhibit must come from the recorded instrument, not from a convenience table.",
+          "action": "Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate."
+        },
+        {
+          "severity": "STRUCTURAL",
+          "gap": "Funding components are recorded as amounts applied, not as traced origins.",
+          "consequence": "The record establishes what was paid at closing. It does not, on its own, establish the account of origin, the balance in that account before the transfer, or the absence of commingling \u2014 the three elements Illinois tracing requires.",
+          "action": "Obtain the originating account statements covering the 60 days before each transfer and seed the balances as atomic facts."
+        },
+        {
+          "severity": "CRITICAL",
+          "gap": "Documented sources fall $3,940.86 short of the purchase price.",
+          "consequence": "An unsourced balance at closing is the single most effective target for a marital-contribution argument: money whose origin is unproven is presumed marital.",
+          "action": "Produce the settlement statement and identify every debit funding the shortfall."
+        }
+      ]
+    },
+    {
+      "key": "MORADA_MAMI_MEDELLIN",
+      "name": "Morada Mami",
+      "address": "Carrera 76 A # 53-215, Medellin, Antioquia, Colombia",
+      "title_holder": "ARIBIA LLC \u2014 MORADA MAMI (series)",
+      "tax_pin_on_file": null,
+      "tax_pin_corroborated": false,
+      "acquired": null,
+      "purchase_price": null,
+      "sources": [],
+      "sources_total": null,
+      "variance": null,
+      "classification": "UNDETERMINED",
+      "days_from_marriage": null,
+      "gaps": [
+        {
+          "severity": "CRITICAL",
+          "gap": "The document filed as the Morada Mami deed is not a deed to this party.",
+          "consequence": "`Morada Mami Deed Escritura publica 1524 del 13 de febrero de 2008.pdf` is Escritura 1524/1545, executed 13 February 2008 by Constructora Capital S.A. in favor of Cesar Augusto Barco Lopez for COP $87,826,000. It is a chain-of-title instrument from fifteen years before the acquisition at issue, naming a different grantee and a different price. Produced as 'the deed' it would show, on its face, that the party does not hold title \u2014 an unforced and serious error.",
+          "action": "Re-label this instrument as chain of title. Obtain the 2023 escritura de compraventa recording transfer to ARIBIA LLC, together with its certificado de tradicion y libertad."
+        },
+        {
+          "severity": "CRITICAL",
+          "gap": "No acquisition fact of any kind exists for this property.",
+          "consequence": "Purchase price, closing date, and funding sources are all absent from the fact base. No tracing opinion can be offered and no exhibit can be authenticated on this record.",
+          "action": "Extract the purchase instrument and settlement figures, seed them as atomic facts, then re-run this generator."
+        }
+      ]
+    },
+    {
+      "key": "4343_N_Clarendon_Apt_Arlene",
+      "name": "Villa Vista",
+      "address": "4343 N Clarendon Ave, Unit 1610, Chicago, IL 60613",
+      "title_holder": "ARIBIA LLC \u2014 APT ARLENE (series)",
+      "tax_pin_on_file": "09-12-307-023-0000",
+      "tax_pin_corroborated": false,
+      "acquired": "2024-06-22",
+      "purchase_price": 130000.0,
+      "sources": [
+        {
+          "component": "deposit",
+          "amount": 2000.0
+        }
+      ],
+      "sources_total": 2000.0,
+      "variance": -128000.0,
+      "classification": "ACQUIRED DURING MARRIAGE",
+      "days_from_marriage": 540,
+      "gaps": [
+        {
+          "severity": "CRITICAL",
+          "gap": "No source in the record corroborates a parcel identifier for this property.",
+          "consequence": "The property canon carries 09-12-307-023-0000, but that value appears in no verified fact, no indexed exhibit and no document in the store. It is an unsourced assertion, so this schedule does not state it as the parcel identifier. A legal description in a filed exhibit must come from the recorded instrument, not from a convenience table.",
+          "action": "Confirm the parcel number against the Cook County Assessor and the recorded deed, seed it as a cited fact, and regenerate."
+        },
+        {
+          "severity": "STRUCTURAL",
+          "gap": "Funding components are recorded as amounts applied, not as traced origins.",
+          "consequence": "The record establishes what was paid at closing. It does not, on its own, establish the account of origin, the balance in that account before the transfer, or the absence of commingling \u2014 the three elements Illinois tracing requires.",
+          "action": "Obtain the originating account statements covering the 60 days before each transfer and seed the balances as atomic facts."
+        },
+        {
+          "severity": "CRITICAL",
+          "gap": "Documented sources fall $128,000.00 short of the purchase price.",
+          "consequence": "An unsourced balance at closing is the single most effective target for a marital-contribution argument: money whose origin is unproven is presumed marital.",
+          "action": "Produce the settlement statement and identify every debit funding the shortfall."
+        }
+      ]
+    }
+  ],
+  "conflict_audit": {
+    "reported": 21,
+    "genuine": 0,
+    "artifacts": 21
+  },
+  "open_blockers": [
+    {
+      "status": "extracted",
+      "statement": "Drive zip archives not yet inspected. Chittystorage-sasquatch currently extracting; backfill atomic facts and verification items once content hashes land."
+    },
+    {
+      "status": "extracted",
+      "statement": "Letter of Engagement #2 figures not yet extracted. Obtain document and seed atomic facts for retainer, scope, and hourly rates."
+    },
+    {
+      "status": "pending_review",
+      "statement": "Current respondent counsel of record uncertain - Vanguard listed in some filings, but pro se status indicated in others. Confirm via docket lookup."
+    },
+    {
+      "status": "pending_review",
+      "statement": "DIRECTV settlement allocation conflict: components $32,083.33 + $42,778.78 + $21,388.89 (sum=$96,251.00) vs aggregate $192,500.00. Reconcile basis."
+    },
+    {
+      "status": "pending_review",
+      "statement": "Filing-date conflict: Notion records case filing as 2024-01-01 while MSJ records 2024-10-22. Resolve canonical filing date."
+    },
+    {
+      "status": "pending_review",
+      "statement": "Forensic accountant sign-off pending for $818,895.23 USAA tracing analysis. Need CPA attestation before locking as evidentiary canonical."
+    },
+    {
+      "status": "pending_review",
+      "statement": "Petitioner counsel of record: Berlin Melzer vs Gurney Law - conflicting filings, determine current counsel."
+    },
+    {
+      "status": "pending_review",
+      "statement": "Property valuation methodology unclear: $756,000 valuation cited in \u00a710 needs appraisal source identification (Zillow vs licensed appraiser vs comparable sales)."
+    },
+    {
+      "status": "pending_review",
+      "statement": "Seven duplicate copies of 2024-12-24 NOM (Notice of Motion) PDFs found in Drive. Determine canonical filed copy via court docket comparison."
+    },
+    {
+      "status": "pending_review",
+      "statement": "Six duplicate Nicholas Bianchi contributions sheets discovered in Drive. Determine canonical sheet and mark duplicates as superseded."
+    },
+    {
+      "status": "pending_review",
+      "statement": "Three early December 2025 affidavit pages discovered without clear parent document; reconstruct from court docket or original PDF."
+    },
+    {
+      "status": "pending_review",
+      "statement": "Two affidavits dated 2025-12-06 discovered; need to determine if duplicates or distinct evidentiary submissions and reconcile signatures."
+    },
+    {
+      "status": "under_review",
+      "statement": "November 2019 deed recording details for 541 W Addison 3S partially confirmed; recording number and exact recording date still need verification from Cook County Recorder."
+    }
+  ]
+}
