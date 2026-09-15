@@ -123,7 +123,7 @@ class TestDocumentProcessor:
         mock_pdfplumber.assert_called_once_with(pdf_file)
 
     @patch('pdfplumber.open')
-    @patch('pypdf2.PdfReader')
+    @patch('PyPDF2.PdfReader')
     @patch('document_processor.logger')
     def test_extract_text_from_pdf_fallback_to_pypdf2(self, mock_logger, mock_pypdf2, mock_pdfplumber, processor, temp_dir):
         """Test PDF text extraction fallback to PyPDF2"""
