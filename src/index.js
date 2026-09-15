@@ -2,7 +2,6 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import Anthropic from '@anthropic-ai/sdk'
 import { ChittyCloudflareCore } from './chitty-cloudflare-core.js'
-import { traceScopeLog } from './scope-projector.js'
 
 const app = new Hono()
 
@@ -125,15 +124,6 @@ Please provide a detailed analysis with specific references to the documents.`
     }
 
     await storageService?.put(analysisId, analysisResult)
-
-    // Project scope: analysis completed
-    traceScopeLog(c, {
-      externalId: analysisId,
-      scopeType: 'trace_investigation',
-      title: `Analysis: ${query.substring(0, 80)}`,
-      localStatus: 'completed',
-      metadata: { tokensUsed: response.usage, userId: auth.userId },
-    }, c.env)
 
     return c.json(analysisResult)
   } catch (error) {
@@ -323,15 +313,6 @@ app.post('/api/commands', async (c) => {
     })
 
     const commandId = `cmd-${command}-${Date.now()}`;
-
-    // Project scope: command execution
-    traceScopeLog(c, {
-      externalId: commandId,
-      scopeType: 'trace_investigation',
-      title: `Command: ${command}`,
-      localStatus: 'completed',
-      metadata: { command, parameters },
-    }, c.env)
 
     return c.json({
       command,
