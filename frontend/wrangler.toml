@@ -11,16 +11,10 @@ ENVIRONMENT = "production"
 VITE_REGISTRY_URL = "https://registry.chitty.cc"
 
 [observability]
-enabled = true
+enabled = false
+head_sampling_rate = 0
 
 [observability.logs]
-enabled = true
-head_sampling_rate = 1
-invocation_logs = true
-destinations = ["chittytrack-logs"]
-
-[observability.traces]
-enabled = true
-head_sampling_rate = 1
-destinations = ["chittytrack-traces"]
-persist = false
+enabled = false
+head_sampling_rate = 0
+invocation_logs = false
